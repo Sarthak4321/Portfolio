@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .og{
+        @apply  tracking-[1px]
+    }
+    .og::after{
+        @apply content-[''] bg-slate-700 h-[2.4px] w-[0%] left-0 absolute rounded-lg -bottom-[5px] duration-400
+    }
+    .og:hover::after{
+        @apply w-[100%]
+    }
+}
