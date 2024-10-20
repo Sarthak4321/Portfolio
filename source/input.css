@@ -4,13 +4,16 @@
 
 
 @layer components {
-    .og{
-        @apply  tracking-[1px]
+    .og {
+        @apply relative tracking-[1px] text-base
     }
-    .og::after{
-        @apply content-[''] bg-slate-700 h-[2.4px] w-[0%] left-0 absolute rounded-lg -bottom-[5px] duration-400
+
+    .og::after {
+        @apply content-[''] bg-slate-700 h-[2.4px] w-[0%] left-0 absolute rounded-lg -bottom-[5px] duration-300
     }
-    .og:hover::after{
+
+    .og:hover::after {
         @apply w-[100%]
     }
+
 }
