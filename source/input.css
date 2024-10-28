@@ -17,6 +17,7 @@
     }
 
     .olk{
-        @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6
+        @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6 
     }
+    
 }
