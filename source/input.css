@@ -20,4 +20,38 @@
         @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6 
     }
     
+
 }
+
+/* <!-- <section class="h-screen mt-[120px] place-content-center">
+<h2 class="font-main text-2xl font-bold mb-[35px] ml-[55px]">About Me</h2>
+<div class=" flex  justify-around">
+    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
+        <div class="flex justify-center  ">
+            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
+        </div>
+        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
+            fugiat tempore adipisci
+            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
+            nobis non,</p>
+    </div>
+    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
+        <div class="flex justify-center  ">
+            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
+        </div>
+        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
+            fugiat tempore adipisci
+            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
+            nobis non,</p>
+    </div>
+    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
+        <div class="flex justify-center  ">
+            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
+        </div>
+        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
+            fugiat tempore adipisci
+            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
+            nobis non, justify-aroundejr wenfher --watchwnwofnr</p>
+    </div>
+</div>
+</section> --> */
