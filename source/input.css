@@ -20,7 +20,12 @@
         @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6 
     }
     
-
+    .icon{
+        @apply h-8 w-8 
+    }
+    .skl{
+        @apply h-28 w-7
+    }
 }
 
 /* <!-- <section class="h-screen mt-[120px] place-content-center">
