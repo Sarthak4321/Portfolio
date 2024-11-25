@@ -29,6 +29,9 @@
     .slkimg{
         @apply mr-2 h-10 w-10
     }
+    .resources{
+        @apply mt-3 cursor-pointer duration-300 hover:text-[#24262c]
+    }
 }
 
 /* <!-- <section class="h-screen mt-[120px] place-content-center">
