@@ -2,67 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
     .og {
-        @apply relative tracking-[1px] text-base
+        @apply relative tracking-[1px] text-base;
     }
 
     .og::after {
-        @apply content-[''] bg-slate-700 h-[2.4px] w-[0%] left-0 absolute rounded-lg -bottom-[5px] duration-300
+        @apply content-[''] bg-slate-700 h-[2.4px] w-[0%] left-0 absolute rounded-lg -bottom-[5px] duration-300;
     }
 
     .og:hover::after {
-        @apply w-[100%]
+        @apply w-[100%];
     }
 
-    .olk{
-        @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6 
+    .olk {
+        @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6;
     }
     
-    .icon{
-        @apply h-8 w-8 
+    .icon {
+        @apply h-8 w-8;
     }
-    .skl{
-        @apply content-center text-center rounded-lg mb-6 mr-6 flex items-center font-main text-base font-bold py-2 px-6 bg-gray-300 text-gray-800 
-    }
-    .slkimg{
-        @apply mr-2 h-10 w-10
-    }
-    .resources{
-        @apply mt-3 cursor-pointer duration-300 hover:text-[#24262c]
-    }
-}
 
-/* <!-- <section class="h-screen mt-[120px] place-content-center">
-<h2 class="font-main text-2xl font-bold mb-[35px] ml-[55px]">About Me</h2>
-<div class=" flex  justify-around">
-    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
-        <div class="flex justify-center  ">
-            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
-        </div>
-        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
-            fugiat tempore adipisci
-            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
-            nobis non,</p>
-    </div>
-    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
-        <div class="flex justify-center  ">
-            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
-        </div>
-        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
-            fugiat tempore adipisci
-            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
-            nobis non,</p>
-    </div>
-    <div class="olk hover:translate-z-1 hover:scale-110 duration-500">
-        <div class="flex justify-center  ">
-            <img class="bg-white mt-5 rounded-[50%] h-16 w-16 items-center" src="education.png" alt="">
-        </div>
-        <p class="content-center text-center mt-2 font-main p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
-            fugiat tempore adipisci
-            nulla quia quod! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque odit quis
-            nobis non, justify-aroundejr wenfher --watchwnwofnr</p>
-    </div>
-</div>
-</section> --> */
+    .skl {
+        @apply content-center text-center rounded-lg mb-6 mr-6 flex items-center font-main text-base font-bold py-2 px-6 bg-gray-300 text-gray-800;
+    }
+
+    .slkimg {
+        @apply mr-2 h-10 w-10;
+    }
+
+    }
+
