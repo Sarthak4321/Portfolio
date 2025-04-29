@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// const mongoDbUrl = 'mongodb://127.0.0.1:27017/portfolio';
+// const mongoDbUrl = process.env.DB_LOCAL;
 const mongoDbUrl = process.env.DB_URL;
 
 
