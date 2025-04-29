@@ -1,8 +1,9 @@
 const mongoose = require ('mongoose');
+const { string } = require('postcss-selector-parser');
 
 const massageSchema = new mongoose.Schema({
     email:{
-        type:String,
+        type:string,
         required:true
     },
     text:{

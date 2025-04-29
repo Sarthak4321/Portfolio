@@ -5,6 +5,7 @@ const PORT = 3000;
 const http = require('http');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+require('dotenv').config();
 
 // adding bodyparser
 const bodyParser = require("body-parser");
