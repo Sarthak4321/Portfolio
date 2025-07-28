@@ -18,7 +18,7 @@
     .olk {
         @apply bg-black h-[350px] w-[25%] rounded-lg shadow-lg shadow-gray-700 text-white text-center p-6;
     }
-    
+
     .icon {
         @apply h-8 w-8;
     }
@@ -31,5 +31,5 @@
         @apply mr-2 h-10 w-10;
     }
 
-    }
+}
 
