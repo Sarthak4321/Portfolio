@@ -50,7 +50,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const db = require('./model/db');
-const Massage = require('../model/massage');
+const Massage = require('./model/massage');
 require('dotenv').config();
 
 const app = express();
