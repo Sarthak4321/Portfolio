@@ -5,10 +5,7 @@ require('dotenv').config();
 const mongoDbUrl = process.env.DB_URL;
 
 
-mongoose.connect(mongoDbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(process.env.DB_URL);
 
 const db = mongoose.connection;
 
