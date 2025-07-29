@@ -54,8 +54,8 @@ const Massage = require('./model/massage');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
-// const PORT = 'https://portfolio-ghrm-a3jcp86l5-sarthak4321s-projects.vercel.app/';
+// const PORT = 3000;
+const PORT = 'https://portfolio-ghrm-n0szsd2y8-sarthak4321s-projects.vercel.app/';
 
 // Static files
 app.use(express.static('distribution'));
