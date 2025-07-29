@@ -69,11 +69,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 // Home Route
-// app.get('/', (req, res) => {
-//   res.render("index");
-// });
 app.get('/', (req, res) => {
-  res.send("HI");
+  res.render("index");
 });
 
 // Handle form submission
