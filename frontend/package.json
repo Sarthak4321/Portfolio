@@ -13,3 +13,6 @@
   "license": "ISC",
   "description": ""
 }
+"scripts": {
+  "build": "react-scripts build"
+}
