@@ -54,7 +54,8 @@ const Massage = require('./model/massage');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
+const PORT = 'https://portfolio-ghrm-a3jcp86l5-sarthak4321s-projects.vercel.app/';
 
 // Static files
 app.use(express.static('distribution'));
@@ -114,13 +115,6 @@ app.post('/massage', async (req, res) => {
   `
     });
 
-
-    // await transporter.sendMail({
-    //   from: `"Sarthak" <${process.env.EMAIL_USER}>`,
-    //   to: email,
-    //   subject: 'Thanks for contacting!',
-    //   html: `<p>Hello,</p><p>Thank you for your message:</p><blockquote>${text}</blockquote><p>I’ll get back to you shortly!</p>`,
-    // });
 
     // 2. Notify admin
     await transporter.sendMail({
