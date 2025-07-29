@@ -58,7 +58,7 @@ const app = express();
 const PORT = 'https://portfolio-ghrm-n0szsd2y8-sarthak4321s-projects.vercel.app/';
 
 // Static files
-app.use(express.static('distribution'));
+app.use(express.static('frontend'));
 
 // Middleware
 app.use(bodyParser.json());
