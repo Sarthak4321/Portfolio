@@ -49,8 +49,8 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-const db = require('./db');
-const Massage = require('./model/massage');
+const db = require('../db');
+const Massage = require('../model/massage');
 require('dotenv').config();
 
 const app = express();
@@ -58,7 +58,7 @@ const PORT = 3000;
 // const PORT = 'https://portfolio-ghrm-n0szsd2y8-sarthak4321s-projects.vercel.app/';
 
 // Static files
-app.use(express.static('frontend'));
+app.use(express.static('distribution'));
 
 // Middleware
 app.use(bodyParser.json());
