@@ -85,3 +85,8 @@ app.post('/massage', async (req, res) => {
         res.status(400).render("massageSendUnsuccesful");
     }
 });
+
+// Start server
+// app.listen(PORT, () => {
+//     console.log("✅ Sarthak's Server has connected successfully");
+// });
