@@ -56,7 +56,7 @@ app.post('/massage', async (req, res) => {
             html: `
   <div style="font-family: 'Segoe UI', sans-serif; color: #222; background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 600px; margin: auto;">
     <div style="text-align: center; margin-bottom: 25px;">
-      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDN4dGRsaHQzZWt0bDI1ejlncDV4NzJib2xxczE0eHNodWhnMTg4byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/0kR0P92xjgvYhK4G4n/giphy.gif" 
+      <img src="https://media.giphy.com/media/f9k1tV7HyORcngKF8v/giphy.gif"
            alt="Message Delivered" 
            style="width: 100%; max-width: 400px; border-radius: 10px;">
     </div>
