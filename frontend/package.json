@@ -1,18 +1,10 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^4.1.11"
-  },
   "name": "tailwindprac",
   "version": "1.0.0",
-  "main": "index.js",
-  "build": "echo 'Nothing to build — deploying static site'",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo 'Static HTML + Tailwind site — nothing to build'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
-
-  
+  "devDependencies": {
+    "tailwindcss": "^4.1.11"
+  }
 }
