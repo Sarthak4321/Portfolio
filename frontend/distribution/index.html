@@ -1,19 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css">
-    <title>Sarthak.</title>
+
+    <meta name="google-site-verification" content="ddRfUtDRD79AdqSsdvS6r9OAUVYcNWUmaBR45fP2w0o" />
+    <title>Sarthak Roy | Full Stack Developer Portfolio</title>
+    <meta name="description" content="Explore the portfolio of Sarthak Roy — a full stack web developer using React, Node.js, and MongoDB." />
+    <meta name="keywords" content="Sarthak Roy, Web Developer, React Developer, Node.js, MongoDB, Portfolio, Full Stack Developer" />
+    <meta name="author" content="Sarthak Roy" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sarthak Roy | Full Stack Developer Portfolio" />
+    <meta property="og:description" content="Explore the portfolio of Sarthak Roy — a full stack web developer using React, Node.js, and MongoDB." />
+    <meta property="og:image" content="https://sarthakroy.netlify.app/preview.jpg" />
+    <meta property="og:url" content="https://sarthakroy.netlify.app/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sarthak Roy | Full Stack Developer" />
+    <meta name="twitter:description" content="Modern web developer portfolio built with React, Tailwind, Node.js and more." />
+    <meta name="twitter:image" content="https://sarthakroy.netlify.app/preview.jpg" />
 </head>
+
 
 
 
 <body class="mx-auto">
     <main class="w-full">
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Responsive Alert</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <style>
+                .icon {
+                    width: 32px;
+                    height: 32px;
+                }
+            </style>
+        </head>
+
+        <body class="flex items-center justify-center min-h-screen bg-gray-700 relative">
+
+            <!-- ALERT MODAL -->
+            <div id="alert"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 transition duration-300">
+                <div
+                    class="bg-black p-6 rounded-lg shadow-xl text-center w-[90%] max-w-sm transform transition-all scale-95 hover:scale-100 duration-300">
+
+                    <!-- Close button -->
+                    <div class="flex justify-end">
+                        <button id="ok" onclick="clicked()" aria-label="Close alert"
+                            class="text-gray-500 hover:text-red-500 focus:outline-none">
+                            ✕
+                        </button>
+                    </div>
+
+                    <!-- Content -->
+                    <p class="font-bold text-lg text-gray-100 mt-2">Follow Me On:</p>
+                    <div class="flex justify-center gap-6 mt-6">
+                        <a target="_blank"
+                            href="https://www.linkedin.com/in/sarthak-roy-1b290822a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+                            <img class="icon hover:scale-110 transition" src="linkdin.png" alt="LinkedIn" />
+                        </a>
+                        <a target="_blank" href="https://x.com/isarthakroy?t=yZOoDZV6FoJda9A9YHuKCw&s=09">
+                            <img class="icon hover:scale-110 transition" src="twitter.png" alt="Twitter" />
+                        </a>
+                        <a target="_blank" href="https://www.instagram.com/i___sarthakroy?igsh=MXV3c3ZremVlMTBidA==">
+                            <img class="icon hover:scale-110 transition" src="tinsta.png" alt="Instagram" />
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Script to show modal -->
+            <script>
+                setTimeout(() => {
+                    const alert = document.getElementById('alert');
+                    alert.classList.remove('hidden');
+                    alert.classList.add('flex');
+                }, 3000);
+
+                function clicked() {
+                    const alert = document.getElementById('alert');
+                    alert.classList.add('hidden');
+                }
+            </script>
+
+        </body>
+
+        </html>
+
         <div class="max-w-7xl mx-auto">
 
             <div class="max-w-7xl mx-auto">
@@ -94,7 +185,7 @@
                     <!-- Avatar -->
                     <div class="w-full lg:w-1/2 flex justify-center">
                         <img class="h-70 w-70 sm:h-96 sm:w-60 lg:h-96 lg:w-80 object-contain"
-                            src="/frontend/distribution/self_5-removebg-preview.png" alt="Sarthak Avatar" />
+                            src="self_5-removebg-preview.png" alt="Sarthak Avatar" />
                     </div>
 
                     <!-- Text content -->
@@ -173,7 +264,7 @@
 
                     <!-- Image Section -->
                     <div class="w-full sm:w-1/2 flex justify-center">
-                        <img src="/frontend/distribution/secound_2-removebg.png" alt="Education Image"
+                        <img src="secound_2-removebg.png" alt="Education Image"
                             class="w-[330px] h-[290px] sm:w-[450px] sm:h-[450px]" />
                     </div>
 
@@ -314,22 +405,23 @@
                 <div
                     class="bg-gray-200 shadow-lg rounded-2xl p-8 md:p-20 md:px-28 flex flex-col md:flex-row items-center gap-12">
 
-                   
+
                     <div class="w-full md:w-1/2">
                         <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_puciaact.json"
                             background="transparent" speed="1" loop autoplay class="w-full max-w-[280px] mx-auto">
                         </lottie-player>
                     </div>
 
-                    
+
                     <div class="flex-1">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Let's Work Together!</h2>
                         <p class="text-gray-600 text-sm md:text-base mb-6 font-medium">
                             Leave your email and message, I will contact you shortly.
                         </p>
 
-                        
-                        <form action="/massage" method="post" class="flex flex-col md:flex-row gap-4">
+
+                        <form action="https://portfolio-5eio.onrender.com/massage" method="POST"
+                            class="flex flex-col md:flex-row gap-4">
                             <input type="email" name="email" placeholder="Enter your email"
                                 class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
                             <input type="text" name="text" placeholder="Leave a message"
@@ -351,7 +443,7 @@
 
 
 
-<!-- 
+            <!-- 
             <section class="flex items-center justify-center w-full mb-11 px-4 sm:py-24 sm:mb-20 bg-white">
                 <div
                     class="bg-gray-200 shadow-lg rounded-2xl p-8 md:p-20 md:px-28 flex flex-col md:flex-row items-center gap-12">
