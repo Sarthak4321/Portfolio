@@ -1,565 +1,706 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 
 <head>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>Sarthak Roy | Full Stack Developer Portfolio</title>
+
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="/style.css">
 
-    <meta name="google-site-verification" content="ddRfUtDRD79AdqSsdvS6r9OAUVYcNWUmaBR45fP2w0o" />
-    <title>Sarthak Roy | Full Stack Developer Portfolio</title>
-    <meta name="description" content="Explore the portfolio of Sarthak Roy — a full stack web developer using React, Node.js, and MongoDB." />
-    <meta name="keywords" content="Sarthak Roy, Web Developer, React Developer, Node.js, MongoDB, Portfolio, Full Stack Developer" />
-    <meta name="author" content="Sarthak Roy" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Sarthak Roy | Full Stack Developer Portfolio" />
-    <meta property="og:description" content="Explore the portfolio of Sarthak Roy — a full stack web developer using React, Node.js, and MongoDB." />
-    <meta property="og:image" content="https://sarthakroy.netlify.app/preview.jpg" />
-    <meta property="og:url" content="https://sarthakroy.netlify.app/" />
-    <meta property="og:type" content="website" />
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #f97316;
+        }
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sarthak Roy | Full Stack Developer" />
-    <meta name="twitter:description" content="Modern web developer portfolio built with React, Tailwind, Node.js and more." />
-    <meta name="twitter:image" content="https://sarthakroy.netlify.app/preview.jpg" />
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        accent: '#f97316',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        main: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
+<body class="antialiased">
+    <!-- ALERT MODAL -->
+    <div id="alert"
+        class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm items-center justify-center z-[100] transition-opacity duration-500 opacity-0">
+        <div
+            class="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl text-center w-[90%] max-w-sm transform transition-all scale-95 duration-500">
+            <div class="flex justify-end absolute top-4 right-4">
+                <button onclick="closeAlert()" class="text-slate-400 hover:text-accent transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <h3 class="font-main font-bold text-2xl text-white mb-6">Let's Connect!</h3>
+            <div class="flex justify-center gap-8 mb-6">
+                <a target="_blank" href="https://www.linkedin.com/in/sarthak-roy-1b290822a"
+                    class="hover:scale-125 transition-transform">
+                    <img class="w-10 h-10" src="linkdin.png" alt="LinkedIn" />
+                </a>
+                <a target="_blank" href="https://x.com/isarthakroy" class="hover:scale-125 transition-transform">
+                    <img class="w-10 h-10" src="twitter.png" alt="Twitter" />
+                </a>
+                <a target="_blank" href="https://www.instagram.com/i___sarthakroy"
+                    class="hover:scale-125 transition-transform">
+                    <img class="w-10 h-10" src="tinsta.png" alt="Instagram" />
+                </a>
+            </div>
+            <p class="text-slate-400 text-sm">Follow my journey and updates</p>
+        </div>
+    </div>
 
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 glass border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+            <div class="flex items-center">
+                <span class="text-primary font-main font-bold text-2xl tracking-tighter">Sarthak<span
+                        class="text-accent">.</span></span>
+            </div>
 
+            <div class="hidden md:flex items-center gap-10">
+                <a href="projects.html"
+                    class="text-slate-600 hover:text-primary font-medium transition-colors">Projects</a>
+                <a href="#" class="text-slate-600 hover:text-primary font-medium transition-colors">Blog</a>
+                <a href="#" class="text-slate-600 hover:text-primary font-medium transition-colors">Contact</a>
+                <a href="https://github.com/Sarthak4321" target="_blank"
+                    class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full hover:bg-slate-800 transition-all">
+                    <img class="w-5 h-5" src="https://img.icons8.com/windows/64/000000/github.png" alt="GitHub"
+                        style="filter: brightness(0) invert(1);" />
+                    <span class="font-semibold text-sm">Github</span>
+                </a>
+            </div>
 
-<body class="mx-auto">
-    <main class="w-full">
+            <button id="menuToggle" class="md:hidden text-primary">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
 
+        <!-- Mobile Menu (Enhanced) -->
+        <div id="mobileMenu"
+            class="hidden fixed inset-x-0 top-20 bg-white/95 backdrop-blur-md border-b border-slate-100 p-8 flex flex-col gap-6 shadow-2xl z-40 transition-all duration-300 origin-top transform scale-y-0 opacity-0">
+            <a href="projects.html"
+                class="text-slate-800 text-xl font-bold tracking-tight hover:text-accent transition-colors">Projects</a>
+            <a href="#"
+                class="text-slate-800 text-xl font-bold tracking-tight hover:text-accent transition-colors">Blog</a>
+            <a href="#contact"
+                class="text-slate-800 text-xl font-bold tracking-tight hover:text-accent transition-colors">Contact</a>
+            <div class="pt-4 border-t border-slate-100">
+                <a href="https://github.com/Sarthak4321" target="_blank"
+                    class="flex items-center justify-center gap-3 bg-primary text-white py-4 rounded-2xl font-bold shadow-lg shadow-slate-200">
+                    <img class="w-6 h-6" src="https://img.icons8.com/windows/64/000000/github.png" alt="GitHub"
+                        style="filter: brightness(0) invert(1);" />
+                    <span>Github Profile</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <!DOCTYPE html>
-        <html lang="en">
-
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Responsive Alert</title>
-            <script src="https://cdn.tailwindcss.com"></script>
-            <style>
-                .icon {
-                    width: 32px;
-                    height: 32px;
-                }
-            </style>
-        </head>
-
-        <body class="flex items-center justify-center min-h-screen bg-gray-700 relative">
-
-            <!-- ALERT MODAL -->
-            <div id="alert"
-                class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 transition duration-300">
-                <div
-                    class="bg-black p-6 rounded-lg shadow-xl text-center w-[90%] max-w-sm transform transition-all scale-95 hover:scale-100 duration-300">
-
-                    <!-- Close button -->
-                    <div class="flex justify-end">
-                        <button id="ok" onclick="clicked()" aria-label="Close alert"
-                            class="text-gray-500 hover:text-red-500 focus:outline-none">
-                            ✕
-                        </button>
-                    </div>
-
-                    <!-- Content -->
-                    <p class="font-bold text-lg text-gray-100 mt-2">Follow Me On:</p>
-                    <div class="flex justify-center gap-6 mt-6">
-                        <a target="_blank"
-                            href="https://www.linkedin.com/in/sarthak-roy-1b290822a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-                            <img class="icon hover:scale-110 transition" src="linkdin.png" alt="LinkedIn" />
-                        </a>
-                        <a target="_blank" href="https://x.com/isarthakroy?t=yZOoDZV6FoJda9A9YHuKCw&s=09">
-                            <img class="icon hover:scale-110 transition" src="twitter.png" alt="Twitter" />
-                        </a>
-                        <a target="_blank" href="https://www.instagram.com/i___sarthakroy?igsh=MXV3c3ZremVlMTBidA==">
-                            <img class="icon hover:scale-110 transition" src="tinsta.png" alt="Instagram" />
-                        </a>
-                    </div>
-
+    <main class="w-full hero-gradient">
+        <!-- HERO SECTION -->
+        <section
+            class="max-w-7xl mx-auto px-6 lg:px-12 pt-8 pb-12 md:py-12 flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+            <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-1" data-aos="fade-right">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-accent/20 rounded-full blur-3xl opacity-30 float-animation"></div>
+                    <img class="h-64 w-64 sm:h-80 sm:w-80 md:h-[450px] md:w-[450px] object-contain relative z-10 filter drop-shadow-2xl float-animation"
+                        src="self_5-removebg-preview.png" alt="Sarthak Roy" />
                 </div>
             </div>
 
-            <!-- Script to show modal -->
-            <script>
-                setTimeout(() => {
-                    const alert = document.getElementById('alert');
-                    alert.classList.remove('hidden');
-                    alert.classList.add('flex');
-                }, 3000);
+            <div class="w-full lg:w-1/2 text-center lg:text-left order-2 lg:order-2" data-aos="fade-left">
+                <h1
+                    class="font-main text-slate-900 font-bold text-4xl sm:text-5xl md:text-7xl leading-tight mb-4 md:mb-6 tracking-tight">
+                    Sarthak Roy
+                </h1>
+                <h2 class="font-main text-xl sm:text-2xl md:text-3xl text-slate-500 font-light mb-6 md:mb-8 italic">
+                    Pushing boundaries, <span class="text-primary font-medium">one line at a time.</span>
+                </h2>
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0">
+                    Full-stack developer architecting scalable digital experiences. Specialized in
+                    <span class="font-semibold text-primary">MERN Stack</span> and performance optimization.
+                    I transform complex problems into elegant, human-centric solutions.
+                </p>
 
-                function clicked() {
-                    const alert = document.getElementById('alert');
-                    alert.classList.add('hidden');
-                }
-            </script>
-
-        </body>
-
-        </html>
-
-        <div class="max-w-7xl mx-auto">
-
-            <div class="max-w-7xl mx-auto">
-                <nav class="bg-gray-200 sticky top-0 z-50 w-full">
-                    <div class="flex items-center justify-between h-16 mx-3">
-                        <!-- Logo -->
-                        <div>
-                            <span
-                                class="text-black sm:ml-5 font-bold font-main text-xl cursor-pointer hover:text-gray-700">Sarthak.</span>
-                        </div>
-
-                        <!-- Desktop Links (Hidden on mobile) -->
-                        <div class="flex sm:flex hidden items-center sm:gap-8">
-                            <a href="projects.html"
-                                class="font-main og font-bold text-gray-500 hover:text-gray-700">Projects</a>
-                            <a href="#" class="font-main og font-bold text-gray-500 hover:text-gray-700"
-                                target="_blank">Blog</a>
-                            <a href="#" class="font-main og font-bold text-gray-500 hover:text-gray-700"
-                                target="_blank">Contact
-                                Me</a>
-                        </div>
-
-                        <!-- GitHub Link (Hidden on mobile) -->
-                        <div class="sm:flex hidden sm:opacity-100 sm:mr-5 items-center gap-2">
-                            <a href="https://github.com/Sarthak4321" target="_blank" class="flex items-center gap-2">
-                                <img width="30" height="30" src="https://img.icons8.com/windows/64/github.png"
-                                    alt="GitHub" />
-                                <span class="font-bold font-main text-gray-500 hover:text-gray-700">Github</span>
-                            </a>
-                        </div>
-
-                        <!-- Mobile Hamburger -->
-                        <div class="sm:hidden">
-                            <button id="menuToggle" aria-label="Toggle Menu" class="text-black focus:outline-none">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Dropdown Menu -->
-                    <div id="mobileMenu" class="sm:hidden hidden flex-col px-4 pb-4 bg-slate-200">
-                        <a href="projects.html"
-                            class="block py-2 font-main font-bold text-gray-500 hover:text-gray-700">Projects</a>
-                        <a href="#" class="block py-2 font-main font-bold text-gray-500 hover:text-gray-700"
-                            target="_blank">Blog</a>
-                        <a href="#" class="block py-2 font-main font-bold text-gray-500 hover:text-gray-700"
-                            target="_blank">Contact
-                            Me</a>
-                        <!-- <a href="https://github.com/Sarthak4321" target="_blank"
-                class="block py-2 font-main font-bold text-gray-500 hover:text-gray-700">Github</a> -->
-
-                        <a href="https://github.com/Sarthak4321" target="_blank" class="flex items-center gap-2">
-                            <img width="30" height="30" src="https://img.icons8.com/windows/64/github.png"
-                                alt="GitHub" />
-                            <span class="font-bold font-main text-gray-500 hover:text-gray-700">Github</span>
-                        </a>
-                    </div>
-
-                    <!-- Toggle Script -->
-                    <script>
-                        document.getElementById('menuToggle').addEventListener('click', function () {
-                            const menu = document.getElementById('mobileMenu');
-                            menu.classList.toggle('hidden');
-                        });
-                    </script>
-                </nav>
+                <div class="flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="SARTHAK ROY.pdf" download="Sarthak_Resume"
+                        class="w-full xs:w-auto bg-primary text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 hover:-translate-y-1 transition-all shadow-lg shadow-slate-200">
+                        <span>Download CV</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
+        </section>
 
+        <!-- MISSION STATEMENT -->
+        <section class="py-16 md:py-24 bg-slate-50/50" data-aos="fade-up">
+            <div class="max-w-4xl mx-auto text-center px-6">
+                <p class="font-light text-xl sm:text-2xl md:text-3xl text-slate-700 leading-relaxed md:leading-snug">
+                    I'm on a mission to revolutionize the <span class="text-accent font-bold">Indian event
+                        industry</span>,
+                    building a seamless, high-performance platform that unites the entire ecosystem.
+                    <a href="https://eventmate.vercel.app/"
+                        class="inline-block mt-8 text-primary font-bold text-base sm:text-lg hover:text-accent transition-colors underline decoration-2 underline-offset-8">
+                        View Vision Details →
+                    </a>
+                </p>
+            </div>
+        </section>
 
-
-            <section class="w-full px-4 py-14">
-                <!-- Main content row -->
-                <div class="flex flex-col mt-3 lg:flex-row items-center justify-center gap-8 max-w-7xl mx-auto ">
-                    <!-- Avatar -->
-                    <div class="w-full lg:w-1/2 flex justify-center">
-                        <img class="h-70 w-70 sm:h-96 sm:w-60 lg:h-96 lg:w-80 object-contain"
-                            src="self_5-removebg-preview.png" alt="Sarthak Avatar" />
-                    </div>
-
-                    <!-- Text content -->
-                    <div class="w-full lg:w-1/2 text-center lg:text-left">
-                        <h1 class="font-main-poppins text-slate-800 font-bold text-4xl sm:text-5xl">Sarthak Roy</h1>
-                        <h2
-                            class="font-main-poppins font-light text-slate-600 text-2xl sm:text-3xl mt-2 mb-3 whitespace-nowrap">
-                            becoming my best version
+        <!-- EDUCATION SECTION -->
+        <section id="aboutme" class="py-20 md:py-32 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="flex flex-col lg:flex-row items-center gap-12 md:gap-20">
+                    <div class="w-full lg:w-1/2 order-2 lg:order-1" data-aos="fade-right">
+                        <h2 class="text-accent font-bold uppercase tracking-widest text-[10px] md:text-sm mb-4">Journey
                         </h2>
-                        <p
-                            class="text-base sm:text-lg font-main-poppins mx-auto lg:mx-0 max-w-md sm:max-w-lg lg:max-w-xl">
-                            Web developer, problem solver, and tech enthusiast. I build sleek, responsive websites with
-                            HTML,
-                            CSS,
-                            Tailwind, JavaScript, Node.js, Express.js and MongoDB. Always exploring new ideas and
-                            pushing
-                            boundaries.
-                            <br />—let’s create something awesome! 🚀
-                        </p>
+                        <h1 class="font-main text-slate-900 font-bold text-3xl md:text-5xl mb-10 leading-tight">Academic
+                            Foundation</h1>
 
-                        <a href="SARTHAK ROY.pdf" download="Sarthak's Resume" target="_blank" rel="noopener noreferrer">
-                            <button
-                                class="transition-transform transform hover:scale-110 bg-black hover:bg-slate-700 duration-300 text-white font-main font-bold px-7 py-2 rounded-md mt-6"
-                                type="button">
-                                Download Resume
-                            </button>
-                        </a>
+                        <div
+                            class="space-y-10 relative before:absolute before:left-0 before:top-2 before:h-[95%] before:w-0.5 before:bg-slate-100 ml-1 md:ml-2">
+                            <div class="relative pl-8 md:pl-10">
+                                <div
+                                    class="absolute left-[-4px] md:left-[-5px] top-2 w-2 md:w-3 h-2 md:h-3 rounded-full bg-accent">
+                                </div>
+                                <h3 class="text-lg md:text-xl font-bold text-slate-800 leading-tight">B.Tech in
+                                    Information Technology</h3>
+                                <p class="text-slate-600 font-medium mt-1 text-sm md:text-base">Bengal College of
+                                    Engineering and Technology</p>
+                                <p
+                                    class="text-accent font-bold text-[10px] md:text-xs mt-2 uppercase tracking-tight italic bg-orange-50 inline-block px-3 py-1 rounded-full">
+                                    Final Year • Class of 2026</p>
+                            </div>
+
+                            <div class="relative pl-8 md:pl-10">
+                                <div
+                                    class="absolute left-[-4px] md:left-[-5px] top-2 w-2 md:w-3 h-2 md:h-3 rounded-full bg-slate-200">
+                                </div>
+                                <h3 class="text-base md:text-lg font-bold text-slate-800 leading-tight">Higher Secondary
+                                    (12th) Science</h3>
+                                <p class="text-slate-500 text-sm md:text-base">Kaity N.C High School</p>
+                            </div>
+
+                            <div class="relative pl-8 md:pl-10">
+                                <div
+                                    class="absolute left-[-4px] md:left-[-5px] top-2 w-2 md:w-3 h-2 md:h-3 rounded-full bg-slate-200">
+                                </div>
+                                <h3 class="text-base md:text-lg font-bold text-slate-800 leading-tight">Secondary (10th)
+                                </h3>
+                                <p class="text-slate-500 text-sm md:text-base">Kaity N.C High School</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2" data-aos="fade-left">
+                        <div class="relative w-full max-w-md md:max-w-lg">
+                            <div class="absolute inset-0 bg-accent rounded-3xl rotate-3 opacity-5"></div>
+                            <img src="secound_2-removebg.png" alt="Work Space"
+                                class="w-full relative z-10 filter drop-shadow-xl" />
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Bottom mission statement -->
-                <div class="mt-32 max-w-4xl mx-auto text-center px-4">
-                    <p class="font-light text-xl sm:text-2xl font-main-poppins">
-                        I'm on a mission to creating a comprehensive solution for the Indian
-                        <span class="text-orange-600 font-bold">event industry</span>, streamlining every aspect into a
-                        <span class="text-orange-600 font-bold">single platform.</span>
-                        <a class="ml-2 font-main font-bold inline-block px-4 py-2 rounded-md bg-black text-white text-sm"
-                            href="http://" target="_blank">
-                            Know More
-                        </a>
+        <!-- SKILLS SECTION -->
+        <section class="py-32 bg-slate-50 relative overflow-hidden">
+            <!-- Decorative Background Element -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
+                <svg width="100%" height="100%">
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1" />
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <div class="text-center mb-24" data-aos="fade-up">
+                    <h2 class="text-accent font-bold uppercase tracking-[0.2em] text-sm mb-4">Competencies</h2>
+                    <h2 class="font-main text-slate-900 font-bold text-4xl md:text-5xl mb-6 tracking-tight">Technical
+                        Arsenal</h2>
+                    <div class="w-20 h-1.5 bg-accent mx-auto rounded-full mb-8"></div>
+                    <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed font-light">
+                        A curated selection of technologies I use to build high-performance,
+                        scalable web applications. Currently deepening mastery in <span
+                            class="text-primary font-bold italic">Java & DSA</span>.
                     </p>
                 </div>
-            </section>
 
-
-
-
-            <section id="aboutme" class=" w-full min-h-screen flex items-center justify-center px-4 py-10 bg-white">
-                <div
-                    class="flex flex-col lg:flex-row items-center justify-between w-full gap-10 max-w-7xl mx-auto px-4">
-
-                    <!-- Text Section -->
-                    <div class="w-full lg:w-1/2 p-4">
-                        <h1 class="font-main-poppins text-slate-800 font-bold text-4xl mb-5">Education</h1>
-                        <p class="text-base font-main-poppins space-y-3">
-                        <div>
-                            <span class="text-xl font-main font-bold">Bachelor of Technology (B.Tech) in Information
-                                Technology</span><br>
-                            <span class="font-main font-bold text-slate-600">Bengal College of Engineering and
-                                Technology,
-                                Durgapur</span><br>
-                            <span class="font-main font-bold text-slate-600 text-sm">Currently in 4th year, 2026</span>
-                        </div>
-
-                        <div class="mt-5">
-                            <span class="font-main font-bold text-sm">- Higher Secondary (12th) - Science</span><br>
-                            <span class="font-main font-bold text-sm">- Kaity N.C High School</span>
-                        </div>
-
-                        <div class="mt-3">
-                            <span class="font-main font-bold text-sm">- Secondary (10th)</span><br>
-                            <span class="font-main font-bold text-sm">- Kaity N.C High School</span>
-                        </div>
-                        </p>
+                <!-- CATEGORY: FRONTEND -->
+                <div class="mb-16">
+                    <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                        <span
+                            class="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 bg-slate-100 px-4 py-1.5 rounded-full">Frontend
+                            Mastery</span>
+                        <div class="flex-grow h-px bg-slate-200"></div>
                     </div>
-
-                    <!-- Image Section -->
-                    <div class="w-full sm:w-1/2 flex justify-center">
-                        <img src="secound_2-removebg.png" alt="Education Image"
-                            class="w-[330px] h-[290px] sm:w-[450px] sm:h-[450px]" />
-                    </div>
-
-                </div>
-            </section>
-
-
-
-
-
-
-
-
-
-
-
-
-            <section class="min-h-screen flex flex-col  py-20 w-full ">
-                <div class="sm:px-4">
-
-                    <div class="sm:mb-11  px-12 mb-0">
-                        <h2 class="font-main-poppins text-slate-800 font-bold text-3xl ">Skills</h2>
-                        <p class="font-main-poppins text-base font-bold  text-gray-500">- These are the skills I’m
-                            currently mastering,
-                            along with preparing for Java and Data Structures & Algorithms (DSA)</p>
-                    </div>
-
-                    <!-- Content Wrapper -->
-                    <div class="flex flex-col md:flex-row items-center gap-12 max-w-7xl w-full">
-
-                        <!-- Left: Image -->
-                        <div class="w-full md:w-1/2 flex justify-center">
-                            <img src="skill 2.jpeg" alt="Skills"
-                                class="w-[250px] h-[270px] sm:w-[370px] sm:h-[370px] object-cover">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <!-- TS (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="100">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                                alt="TypeScript"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">TypeScript</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-blue-500/20 transition-colors duration-500">
+                            </div>
                         </div>
-
-                        <!-- Right: Skills Grid -->
-                        <div class="w-full md:w-1/2 grid grid-cols-2 sm:grid-cols-3 gap-6 p-6">
-                            <!-- Skill Card -->
+                        <!-- React -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="150">
+                            <img src="react.png" alt="React"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">React JS</span>
                             <div
-                                class="flex flex-row sm:h-16 justify-center items-center p-4 bg-gray-100 rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="html.png" alt="HTML" class="h-10 w-10 ">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">HTML</p>
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-sky-500/20 transition-colors duration-500">
                             </div>
+                        </div>
+                        <!-- Next -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-slate-800/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="200">
+                            <img src="next.png" alt="Next"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Next JS</span>
                             <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="icons8-css-48.png" alt="CSS" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">CSS</p>
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-slate-800/20 transition-colors duration-500">
                             </div>
+                        </div>
+                        <!-- Tailwind -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="250">
+                            <img src="tailwind.png" alt="Tailwind"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Tailwind</span>
                             <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="tailwind.png" alt="Tailwind" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700">Tailwind</p>
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-cyan-500/20 transition-colors duration-500">
                             </div>
+                        </div>
+                        <!-- JS -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="300">
+                            <img src="javascript.png" alt="JS"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">ES6+ JS</span>
                             <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="javascript.png" alt="JavaScript" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">JavaScript</p>
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-yellow-500/20 transition-colors duration-500">
                             </div>
+                        </div>
+                        <!-- CSS -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="350">
+                            <img src="icons8-css-48.png" alt="CSS"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">CSS3</span>
                             <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="react.png" alt="React" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">React Js</p>
-                            </div>
-
-                            <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="next.png" alt="Node.js" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">Next Js</p>
-                            </div>
-                            <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="websocket.svg" alt="Node.js" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">Web Socket</p>
-                            </div>
-                            <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="node.png" alt="Node.js" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">Node Js</p>
-                            </div>
-                            <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="mongo db.png" alt="MongoDB" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">Mongo DB</p>
-                            </div>
-                            <div
-                                class="flex flex-row justify-center items-center p-4 bg-gray-100  rounded-xl shadow hover:shadow-lg transition-transform transform hover:scale-105">
-                                <img src="git.png" alt="Git" class="h-10 w-10">
-                                <p class="text-base font-semibold text-gray-700 mb-2 ml-2">Git</p>
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-blue-500/20 transition-colors duration-500">
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-
-
-
-
-
-
-
-            <!-- <section class=" flex items-center justify-center w-full mb-11 px-4 sm:py-24 sm:mb-20 bg-white">
-                <div
-                    class=" bg-gray-200 shadow-lg rounded-2xl p-8 md:p-20 md:px-28 flex flex-col md:flex-row items-center gap-8">
-
-                    
-                    <div class="flex-1">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Let's Work Together!</h2>
-                        <p class="text-gray-600 text-sm md:text-base mb-6 font-medium">
-                            Leave your email and message, I will contact you shortly.
-                        </p>
-
-                       
-                        <form action="/massage" method="post" class="flex flex-col md:flex-row gap-4">
-                            <input type="email" name="email" placeholder="Enter your email"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
-                            <input type="text" name="text" placeholder="Leave a message"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
-                            <button type="submit"
-                                class="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-700 transition-all duration-200">
-                                SEND
-                            </button>
-                        </form>
+                <!-- CATEGORY: BACKEND & DATA -->
+                <div class="mb-16">
+                    <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                        <span
+                            class="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 bg-slate-100 px-4 py-1.5 rounded-full">Server
+                            & Intelligence</span>
+                        <div class="flex-grow h-px bg-slate-200"></div>
                     </div>
-
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <!-- Node -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="100">
+                            <img src="node.png" alt="Node"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Node JS</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-green-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- PostgreSQL (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-600/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="150">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                alt="PostgreSQL"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Postgres</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-blue-600/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- MongoDB -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="200">
+                            <img src="mongo db.png" alt="MongoDB"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">MongoDB</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-emerald-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- Redis (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="250">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg"
+                                alt="Redis" class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Redis</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-red-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- Express (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-slate-400/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                                alt="Express"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110 filter brightness-50">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Express JS</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-slate-400/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- WebSocket -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="350">
+                            <img src="websocket.svg" alt="WebSocket"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Sockets</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-purple-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section> -->
 
+                <!-- CATEGORY: TOOLS & SEC -->
+                <div>
+                    <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                        <span
+                            class="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 bg-slate-100 px-4 py-1.5 rounded-full">Systems
+                            & Security</span>
+                        <div class="flex-grow h-px bg-slate-200"></div>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                        <!-- Auth (Updated) -->
+                        <div class="group relative bg-white p-6 rounded-[3rem] border border-slate-100 flex items-center justify-between gap-6 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 col-span-2"
+                            data-aos="zoom-in" data-aos-delay="100">
+                            <div class="flex items-center gap-4 ml-4">
+                                <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center p-3">
+                                    <svg class="text-blue-500 w-full h-full" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-800 tracking-tight">Authentication</span>
+                                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">JWT •
+                                        OAuth • Firebase</span>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute inset-0 rounded-[3rem] border-2 border-transparent group-hover:border-blue-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- Docker (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-600/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="200">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                alt="Docker" class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Docker</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-sky-600/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- Git -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="250">
+                            <img src="git.png" alt="Git"
+                                class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Git</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-red-500/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                        <!-- Prisma (New) -->
+                        <div class="group relative bg-white p-6 rounded-[2rem] border border-slate-100 flex flex-col items-center gap-4 transition-all duration-500 hover:shadow-2xl hover:shadow-slate-800/10 hover:-translate-y-2"
+                            data-aos="zoom-in" data-aos-delay="300">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
+                                alt="Prisma" class="w-12 h-12 transition-transform duration-500 group-hover:scale-110">
+                            <span class="text-xs font-bold text-slate-800 uppercase tracking-widest">Prisma</span>
+                            <div
+                                class="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-slate-800/20 transition-colors duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-
-
-
-
-
-
-            <section class="flex items-center justify-center w-full mb-11 px-4 sm:py-24 sm:mb-20 bg-white">
+        <!-- CONTACT SECTION (MINIMALIST) -->
+        <section id="contact" class="py-24 bg-white">
+            <div class="max-w-5xl mx-auto px-6 lg:px-12">
                 <div
-                    class="bg-gray-200 shadow-lg rounded-2xl p-8 md:p-20 md:px-28 flex flex-col md:flex-row items-center gap-12">
+                    class="relative overflow-hidden rounded-[3rem] p-8 md:p-16 bg-slate-50/80 backdrop-blur-xl border border-slate-200 flex flex-col lg:flex-row items-center gap-12 shadow-sm">
 
-
-                    <div class="w-full md:w-1/2">
-                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_puciaact.json"
-                            background="transparent" speed="1" loop autoplay class="w-full max-w-[280px] mx-auto">
-                        </lottie-player>
+                    <!-- Subtle Decorative Background -->
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-slate-200/50 rounded-full blur-3xl opacity-50">
+                    </div>
+                    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl opacity-50">
                     </div>
 
+                    <div class="w-full lg:w-5/12 relative z-10" data-aos="fade-right">
+                        <div class="relative">
+                            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_puciaact.json"
+                                background="transparent" speed="0.8" loop autoplay
+                                class="w-full max-w-[280px] mx-auto grayscale opacity-100 grayscale-0 transition-all duration-700">
+                            </lottie-player>
+                        </div>
+                    </div>
 
-                    <div class="flex-1">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Let's Work Together!</h2>
-                        <p class="text-gray-600 text-sm md:text-base mb-6 font-medium">
-                            Leave your email and message, I will contact you shortly.
+                    <div class="w-full lg:w-7/12 relative z-10" data-aos="fade-left">
+                        <h2 class="text-3xl md:text-4xl font-main font-bold text-slate-900 mb-4 tracking-tight">Let's
+                            connect.</h2>
+                        <p class="text-slate-500 text-base mb-10 leading-relaxed font-light">
+                            Developing digital products at the intersection of <span
+                                class="text-slate-900 font-medium">design</span> and <span
+                                class="text-slate-900 font-medium">engineering</span>. Send a message to start a
+                            conversation.
                         </p>
-
 
                         <form action="https://portfolio-5eio.onrender.com/massage" method="POST"
-                            class="flex flex-col md:flex-row gap-4">
-                            <input type="email" name="email" placeholder="Enter your email"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
-                            <input type="text" name="text" placeholder="Leave a message"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
+                            class="flex flex-col gap-5">
+                            <div class="space-y-1">
+                                <label
+                                    class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 ml-4">Email
+                                    Address</label>
+                                <input type="email" name="email" placeholder="hello@example.com" required
+                                    class="w-full px-6 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 placeholder-slate-300 focus:outline-none focus:ring-4 focus:ring-slate-100 transition-all text-sm">
+                            </div>
+                            <div class="space-y-1">
+                                <label
+                                    class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 ml-4">Brief
+                                    Proposal</label>
+                                <textarea name="text" placeholder="Share your vision..." rows="3" required
+                                    class="w-full px-6 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 placeholder-slate-300 focus:outline-none focus:ring-4 focus:ring-slate-100 transition-all text-sm resize-none"></textarea>
+                            </div>
                             <button type="submit"
-                                class="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-700 transition-all duration-200">
-                                SEND
+                                class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 active:scale-95 text-xs uppercase tracking-[0.2em] shadow-lg shadow-slate-200">
+                                Send Message
                             </button>
                         </form>
                     </div>
                 </div>
-            </section>
-
-
-
-
-
-
-
-
-
-            <!-- 
-            <section class="flex items-center justify-center w-full mb-11 px-4 sm:py-24 sm:mb-20 bg-white">
-                <div
-                    class="bg-gray-200 shadow-lg rounded-2xl p-8 md:p-20 md:px-28 flex flex-col md:flex-row items-center gap-12">
-
-                    
-                    <div class="w-full md:w-1/2">
-                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_puciaact.json"
-                            background="transparent" speed="1" loop autoplay class="w-full max-w-sm mx-auto">
-                        </lottie-player>
-                    </div>
-
-                    
-                    <div class="flex-1">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Let's Work Together!</h2>
-                        <p class="text-gray-600 text-sm md:text-base mb-6 font-medium">
-                            Leave your email and message, I will contact you shortly.
-                        </p>
-
-                     
-                        <form action="/massage" method="post" class="flex flex-col md:flex-row gap-4">
-                            <input type="email" name="email" placeholder="Enter your email"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
-                            <input type="text" name="text" placeholder="Leave a message"
-                                class="flex-1 p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
-                            <button type="submit"
-                                class="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-700 transition-all duration-200">
-                                SEND
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </section> -->
-
-
-
-
-
-
-
-
-            <footer class="bg-black text-white px-6 py-12">
-                <!-- Top Section -->
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
-                    <!-- Brand & Social -->
-                    <div class="flex flex-col gap-5">
-                        <h2 class="text-2xl font-bold">Sarthak.</h2>
-                        <div class="flex gap-5">
-                            <!-- Replace href with actual links -->
-                            <a href="#" aria-label="GitHub" class="hover:scale-110 transition duration-300">
-                                <svg class="fill-gray-400 hover:fill-white" width="25" height="25"
-                                    viewBox="0,0,256,256">...</svg>
-                            </a>
-                            <a href="#" aria-label="LinkedIn" class="hover:scale-110 transition duration-300">
-                                <svg class="fill-gray-400 hover:fill-white" width="25" height="25"
-                                    viewBox="0,0,256,256">...</svg>
-                            </a>
-                            <a href="#" aria-label="Twitter" class="hover:scale-110 transition duration-300">
-                                <svg class="fill-gray-400 hover:fill-white" width="25" height="25"
-                                    viewBox="0,0,256,256">...</svg>
-                            </a>
-                            <a href="#" aria-label="Dribbble" class="hover:scale-110 transition duration-300">
-                                <svg class="fill-gray-400 hover:fill-white" width="25" height="25"
-                                    viewBox="0,0,256,256">...</svg>
-                            </a>
-                            <a href="#" aria-label="Email" class="hover:scale-110 transition duration-300">
-                                <svg class="fill-gray-400 hover:fill-white" width="25" height="25"
-                                    viewBox="0,0,256,256">...</svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-4">PROJECT</h3>
-                        <div class="flex items-center gap-3 text-gray-400">
-                            <p>Under Construction</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50">
-                                <circle cx="25" cy="25" r="20" fill="none" stroke="#6b7280" stroke-width="4"
-                                    stroke-dasharray="90,150" stroke-dashoffset="0">
-                                    <animateTransform attributeName="transform" type="rotate" from="0 25 25"
-                                        to="360 25 25" dur="2s" repeatCount="indefinite" />
-                                </circle>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Resources -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-4">RESOURCES</h3>
-                        <ul class="space-y-2 text-gray-400">
-                            <li class="hover:text-white transition cursor-pointer">About</li>
-                            <li class="hover:text-white transition cursor-pointer">Blog</li>
-                            <li class="hover:text-white transition cursor-pointer">Collaboration</li>
-                            <li class="hover:text-white transition cursor-pointer">Contact</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Divider -->
-                <div class="my-8 border-t border-gray-700 w-full"></div>
-
-                <!-- Bottom Section -->
-                <div
-                    class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 px-2">
-                    <p class="py-2 font-semibold">© 2024 - 2025</p>
-                    <div class="flex gap-6 py-2 font-semibold">
-                        <p class="hover:text-white transition cursor-pointer">Privacy Notice</p>
-                        <p class="hover:text-white transition cursor-pointer">Terms of Use</p>
-                    </div>
-                </div>
-            </footer>
-
-
-            <script src="script.js"></script>
-        </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="bg-slate-900 pt-20 pb-10 px-6 lg:px-12 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                <div class="flex flex-col gap-6">
+                    <h2 class="text-3xl font-main font-bold">Sarthak<span class="text-accent">.</span></h2>
+                    <p class="text-slate-400 leading-relaxed max-w-xs">
+                        Building the future of web experiences with precision, passion, and high-performance
+                        engineering.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/Sarthak4321" target="_blank"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-accent transition-all hover:-translate-y-1"><img
+                                src="https://img.icons8.com/windows/32/ffffff/github.png" class="w-5" /></a>
+                        <a href="https://www.linkedin.com/in/sarthak-roy-1b290822a" target="_blank"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-accent transition-all hover:-translate-y-1"><img
+                                src="https://img.icons8.com/ios-filled/32/ffffff/linkedin.png" class="w-5" /></a>
+                        <a href="https://x.com/isarthakroy" target="_blank"
+                            class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-accent transition-all hover:-translate-y-1"><img
+                                src="https://img.icons8.com/ios-filled/32/ffffff/twitter.png" class="w-5" /></a>
+                    </div>
+                </div>
+
+                <div class="md:ml-auto">
+                    <h3 class="text-lg font-bold mb-8 flex items-center gap-3">
+                        <span class="w-2 h-2 bg-accent rounded-full"></span> Quick Navigation
+                    </h3>
+                    <ul class="space-y-4 text-slate-400 font-medium">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="projects.html" class="hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:ml-auto">
+                    <h3 class="text-lg font-bold mb-8 flex items-center gap-3">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span> Current Availability
+                    </h3>
+                    <div
+                        class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-2xl border border-slate-700/50 backdrop-blur-sm">
+                        <div
+                            class="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]">
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-white uppercase tracking-wider">Open for Work</p>
+                            <p class="text-xs text-slate-400 mt-1">Available for new projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500">
+                <p>© 2024 - 2025 Sarthak Roy. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // AOS Initialization
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Mobile Menu Toggle (Enhanced with Animation)
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('scale-y-0', 'opacity-0');
+                    mobileMenu.classList.add('scale-y-100', 'opacity-100');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Alert Logic
+        function closeAlert() {
+            const alert = document.getElementById('alert');
+            alert.style.opacity = '0';
+            setTimeout(() => {
+                alert.classList.add('hidden');
+            }, 500);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const alert = document.getElementById('alert');
+                alert.classList.remove('hidden');
+                alert.classList.add('flex');
+                setTimeout(() => {
+                    alert.style.opacity = '1';
+                    alert.querySelector('div').classList.remove('scale-95');
+                    alert.querySelector('div').classList.add('scale-100');
+                }, 10);
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>
