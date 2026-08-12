@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Sarthak Roy</title>
+    <meta name="description"
+        content="Discover Sarthak Roy's engineering principles, full stack capabilities, system architecture expertise, and programming background.">
+
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Caveat:wght@700&family=Mr+De+Haviland&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .font-handwritten {
+            font-family: 'Caveat', cursive;
+        }
+
+
+        :root {
+            --primary: #050507;
+            --cream: #FFF4E1;
+            --sage: #89D7B7;
+            --forest: #428475;
+            --deep: #1A312C;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050507;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-sans {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Syne', sans-serif;
+        }
+
+        .glass {
+            background: rgba(5, 5, 7, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(137, 215, 183, 0.05);
+        }
+
+        .hero-gradient {
+            background-image: radial-gradient(circle at 50% 20%, rgba(137, 215, 183, 0.02) 0%, rgba(5, 5, 7, 0) 60%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050507;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1C1D21;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #89D7B7;
+        }
+
+        /* Subtle grid border layout */
+        .ledger-row {
+            border-bottom: 1px solid rgba(137, 215, 183, 0.08);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ledger-row:hover {
+            border-color: rgba(137, 215, 183, 0.2);
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#050507',
+                        cream: '#FFF4E1',
+                        sage: '#89D7B7',
+                        forest: '#428475',
+                        deep: '#1A312C',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        main: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased bg-primary hero-gradient relative">
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 left-0 w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+            <div class="flex items-center">
+                <a href="index.html" class="text-white font-sans font-bold text-2xl tracking-tighter">Sarthak<span
+                        class="text-sage">.</span></a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-10">
+                <a href="index.html" class="text-slate-300 hover:text-white font-medium transition-colors">Home</a>
+                <a href="projects.html"
+                    class="text-slate-300 hover:text-white font-medium transition-colors">Projects</a>
+                <a href="#" class="text-slate-300 hover:text-white font-medium transition-colors">Blog</a>
+                <a href="about.html" class="text-white font-semibold transition-colors">About</a>
+                <a href="https://github.com/Sarthak4321" target="_blank"
+                    class="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full hover:bg-slate-200 transition-all">
+                    <img class="w-5 h-5" src="https://img.icons8.com/windows/64/000000/github.png" alt="GitHub" />
+                    <span class="font-semibold text-sm">Github</span>
+                </a>
+            </div>
+
+            <button id="menuToggle" class="md:hidden text-white">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Enhanced) -->
+        <div id="mobileMenu"
+            class="hidden fixed inset-x-0 top-20 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 p-8 flex flex-col gap-6 shadow-2xl z-40 transition-all duration-300 origin-top transform scale-y-0 opacity-0">
+            <a href="index.html"
+                class="text-slate-200 text-xl font-bold tracking-tight hover:text-accent transition-colors">Home</a>
+            <a href="projects.html"
+                class="text-slate-200 text-xl font-bold tracking-tight hover:text-accent transition-colors">Projects</a>
+            <a href="#"
+                class="text-slate-200 text-xl font-bold tracking-tight hover:text-accent transition-colors">Blog</a>
+            <a href="about.html"
+                class="text-slate-200 text-xl font-bold tracking-tight hover:text-accent transition-colors">About</a>
+            <div class="pt-4 border-t border-slate-800">
+                <a href="https://github.com/Sarthak4321" target="_blank"
+                    class="flex items-center justify-center gap-3 bg-white text-black py-4 rounded-2xl font-bold shadow-lg">
+                    <img class="w-6 h-6" src="https://img.icons8.com/windows/64/000000/github.png" alt="GitHub" />
+                    <span>Github Profile</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="w-full">
+        <!-- ABOUT HERO SECTION -->
+        <section class="relative pt-20 pb-16 md:pt-24 md:pb-20 px-6 lg:px-12 bg-[#73976A] overflow-hidden">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative z-10">
+                <div class="lg:col-span-8 space-y-8" data-aos="fade-right">
+                    <span class="text-xs uppercase tracking-[0.3em] font-extrabold text-deep/90 block">
+                        Software Engineer &amp; System Architect
+                    </span>
+                    <h1
+                        class="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl text-deep tracking-tight leading-[1.08]">
+                        I build software meant to <span class="font-serif italic font-normal text-white">work
+                            beyond</span> the demo.
+                    </h1>
+                </div>
+                <div class="lg:col-span-4 lg:pt-16 space-y-6 text-deep/85 font-sans text-sm sm:text-base font-light leading-relaxed"
+                    data-aos="fade-left">
+                    <p>
+                        I'm <strong class="text-deep font-semibold">Sarthak Roy</strong>. My engineering focus sits at
+                        the intersection of backend development, reliable system architectures, data models, and secure
+                        infrastructures.
+                    </p>
+                    <p>
+                        I enjoy taking an idea from an initial concept and turning it into a stable system that is
+                        structured, secure, maintainable, and capable of handling real-world scale and concurrency.
+                    </p>
+                    <!-- Handwriting Signature -->
+                    <div class="pt-2 flex justify-end select-none pointer-events-none">
+                        <svg class="w-64 h-24 text-deep/90 transform -rotate-3 -translate-x-4" viewBox="0 0 250 80"
+                            fill="none">
+                            <text x="15" y="46" font-family="'Caveat', cursive" font-size="44" font-weight="bold"
+                                fill="currentColor" letter-spacing="1">Sarthak Roy</text>
+                            <path class="draw-on-scroll" d="M 12,62 Q 80,55 240,42" stroke="currentColor" stroke-width="3.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITIES & TECHNICAL MATRIX (SPLIT EDITORIAL SECTION) -->
+        <section class="py-16 md:py-20 px-6 lg:px-12 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+                <!-- Left Column: Focus description -->
+                <div class="lg:col-span-5 space-y-8" data-aos="fade-up">
+                    <span
+                        class="text-[10px] uppercase tracking-[0.25em] font-bold text-sage bg-forest/30 border border-sage/10 px-4 py-2 rounded-full font-sans inline-block">
+                        Technical Focus
+                    </span>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white leading-tight">
+                        Backend Engineering &amp; Architecture
+                    </h2>
+                    <p class="text-slate-450 text-sm sm:text-base font-light leading-relaxed">
+                        I specialize in developing production-ready full-stack applications with strong server
+                        reliability. My stack revolves around JavaScript, TypeScript, Next.js, Node.js, and Docker
+                        ecosystems.
+                    </p>
+                    <p class="text-slate-450 text-sm sm:text-base font-light leading-relaxed">
+                        I focus heavily on transaction isolation, API performance, relational database designs, and
+                        cryptographic auth flows, ensuring services scale cleanly.
+                    </p>
+                </div>
+
+                <!-- Right Column: Ledger-style Tech Matrix -->
+                <div class="lg:col-span-7 space-y-8" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-mono text-sage">Core Stack Ledger</h3>
+
+                    <div class="border-t border-sage/15 divide-y divide-sage/10 font-sans">
+                        <!-- Row 1: Languages -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">Languages</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">TypeScript, JavaScript, Java,
+                                C</span>
+                        </div>
+                        <!-- Row 2: Backends -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">Backend</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">Node.js, Express.js, REST APIs,
+                                WebSockets</span>
+                        </div>
+                        <!-- Row 3: Databases -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">Databases</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">PostgreSQL, MongoDB, SQL Query
+                                Optimization, Prisma ORM</span>
+                        </div>
+                        <!-- Row 4: Frontends -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">Frontend</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">React.js, Next.js, HTML5, CSS3,
+                                Tailwind CSS</span>
+                        </div>
+                        <!-- Row 5: Cloud & DevOps -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">DevOps &amp; Security</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">Docker, Kubernetes, JWT, Firebase
+                                Auth, Supabase Auth, CI/CD</span>
+                        </div>
+                        <!-- Row 6: Fundamentals -->
+                        <div class="grid grid-cols-3 py-4 text-sm items-center">
+                            <span class="font-display font-bold text-white">Fundamentals</span>
+                            <span class="col-span-2 text-slate-400 font-mono text-xs">Data Structures &amp; Algorithms,
+                                OOP, Operating Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW I THINK ABOUT ENGINEERING (LEDGER GRID DIVISION) -->
+        <section class="py-16 md:py-20 border-t border-b border-sage/10 bg-[#132521]">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="mb-16" data-aos="fade-up">
+                    <span
+                        class="text-xs uppercase tracking-[0.3em] font-extrabold text-sage mb-3 block">Methodology</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">Engineering
+                        Philosophy</h2>
+                </div>
+
+                <!-- Ledger Grid Matrix -->
+                <div class="border-t border-sage/15 divide-y divide-sage/10">
+                    <!-- Principle 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 items-start group transition-colors duration-350 hover:bg-white/[0.01]"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="col-span-1 md:col-span-2 font-display text-4xl font-extrabold text-sage/30 group-hover:text-sage transition-colors duration-300">
+                            01</div>
+                        <div class="col-span-1 md:col-span-3 font-display font-bold text-xl text-white">Start with the
+                            problem</div>
+                        <div
+                            class="col-span-1 md:col-span-7 text-slate-400 font-sans font-light text-sm sm:text-base leading-relaxed">
+                            Before choosing a framework or database, I seek to understand the actual problem. Who is
+                            using the system? What data needs to exist? What can go wrong? What needs to happen
+                            concurrently? Good engineering starts with asking the right questions rather than
+                            immediately writing code.
+                        </div>
+                    </div>
+
+                    <!-- Principle 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 items-start group transition-colors duration-350 hover:bg-white/[0.01]"
+                        data-aos="fade-up" data-aos-delay="150">
+                        <div
+                            class="col-span-1 md:col-span-2 font-display text-4xl font-extrabold text-sage/30 group-hover:text-sage transition-colors duration-300">
+                            02</div>
+                        <div class="col-span-1 md:col-span-3 font-display font-bold text-xl text-white">Design before
+                            complexity</div>
+                        <div
+                            class="col-span-1 md:col-span-7 text-slate-400 font-sans font-light text-sm sm:text-base leading-relaxed">
+                            I prefer clean architectures, but I don't believe every project needs unnecessary layers.
+                            The goal is to find the simplest architectural design that can reliably solve the problem
+                            today while leaving enough room to scale cleanly tomorrow.
+                        </div>
+                    </div>
+
+                    <!-- Principle 3 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 items-start group transition-colors duration-350 hover:bg-white/[0.01]"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="col-span-1 md:col-span-2 font-display text-4xl font-extrabold text-sage/30 group-hover:text-sage transition-colors duration-300">
+                            03</div>
+                        <div class="col-span-1 md:col-span-3 font-display font-bold text-xl text-white">Think about
+                            failure</div>
+                        <div
+                            class="col-span-1 md:col-span-7 text-slate-400 font-sans font-light text-sm sm:text-base leading-relaxed">
+                            A successful request is only one part of a system. I focus on failure cases: concurrent
+                            requests race conditions, query bottlenecks, API timeouts, and token compromise. This
+                            mindset guides transaction handling and authentication boundaries.
+                        </div>
+                    </div>
+
+                    <!-- Principle 4 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 items-start group transition-colors duration-350 hover:bg-white/[0.01]"
+                        data-aos="fade-up" data-aos-delay="250">
+                        <div
+                            class="col-span-1 md:col-span-2 font-display text-4xl font-extrabold text-sage/30 group-hover:text-sage transition-colors duration-300">
+                            04</div>
+                        <div class="col-span-1 md:col-span-3 font-display font-bold text-xl text-white">Build for
+                            production</div>
+                        <div
+                            class="col-span-1 md:col-span-7 text-slate-400 font-sans font-light text-sm sm:text-base leading-relaxed">
+                            I enjoy the engineering work that follows the core feature implementation: performance
+                            tuning, security checks, Docker environments configuration, and monitoring setups. These are
+                            key blocks of stable products.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEMS IN ACTION & EXPERIENCES (TIMELINE CHRONICLE) -->
+        <section class="relative py-16 md:py-20 px-6 overflow-hidden">
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="mb-20" data-aos="fade-up">
+                    <span class="text-xs uppercase tracking-[0.3em] font-extrabold text-sage mb-3 block">Systems</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">Case Studies
+                        &amp; Experience</h2>
+                </div>
+
+                <!-- Ledger timeline grid -->
+                <div class="border-t border-sage/15 divide-y divide-sage/10">
+                    <!-- Case study 1: EvntMet -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-10 items-start group"
+                        data-aos="fade-up">
+                        <div class="col-span-1 md:col-span-3">
+                            <span
+                                class="text-[10px] uppercase tracking-[0.2em] font-mono text-sage font-bold bg-forest/30 border border-sage/15 px-3 py-1.5 rounded-full inline-block">
+                                EvntMet
+                            </span>
+                            <div class="text-xs text-slate-500 font-mono mt-4">MARKETPLACE SYSTEM</div>
+                        </div>
+                        <div class="col-span-1 md:col-span-9 space-y-4">
+                            <h3
+                                class="font-display font-bold text-2xl text-white group-hover:text-sage transition-colors duration-300">
+                                Transactional Safety at Scale
+                            </h3>
+                            <p class="text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+                                EvntMet is an end-to-end marketplace application. I approached it as a system with
+                                distinct
+                                responsibilities: role-based dashboards, booking engines, media assets stored via
+                                Cloudflare
+                                R2, and database models managed on PostgreSQL.
+                            </p>
+                            <p class="text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+                                The core architectural highlight was implementing transactional row locking to isolate
+                                concurrent booking operations and prevent double-booking conditions, ensuring absolute
+                                database consistency.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Case study 2: MailForge AI -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 py-10 items-start group"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-span-1 md:col-span-3">
+                            <span
+                                class="text-[10px] uppercase tracking-[0.2em] font-mono text-sage font-bold bg-forest/30 border border-sage/15 px-3 py-1.5 rounded-full inline-block">
+                                MailForge AI
+                            </span>
+                            <div class="text-xs text-slate-500 font-mono mt-4">AI WORKFLOW SYSTEM</div>
+                        </div>
+                        <div class="col-span-1 md:col-span-9 space-y-4">
+                            <h3
+                                class="font-display font-bold text-2xl text-white group-hover:text-sage transition-colors duration-300">
+                                AI-Powered Automated Pipelines
+                            </h3>
+                            <p class="text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+                                MailForge AI combines application engineering, resume parsing, campaign automation, and
+                                inference states. Built on Next.js, MongoDB, Google Gemini, and Gmail OAuth2.
+                            </p>
+                            <p class="text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+                                Behind the visual elements, I constructed clean APIs for credentials isolation, campaign
+                                dispatch, and containerized deployment with Docker. It proved that integrating AI is
+                                fundamentally a systems and infrastructure problem.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERNSHIP EXPERIENCE SECTION (VIBRANT ORANGE ACCENT - NO ILLUSTRATIONS) -->
+        <section
+            class="relative py-16 md:py-20 px-6 lg:px-12 bg-[#FF6500] text-black border-b border-black/10 overflow-hidden">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative z-10">
+                <div class="lg:col-span-4 space-y-6" data-aos="fade-right">
+                    <span
+                        class="text-[10px] uppercase tracking-[0.25em] font-bold text-black bg-black/10 border border-black/20 px-4 py-2 rounded-full font-sans inline-block">
+                        Professional Experience
+                    </span>
+                    <h2 class="font-display font-extrabold text-4xl text-black leading-tight relative inline-block">
+                        CEHpoint
+                        <!-- Hand-drawn markup underline -->
+                        <svg class="absolute left-0 -bottom-2 w-full h-3 text-black/60"
+                            viewBox="0 0 100 10" fill="none" preserveAspectRatio="none">
+                            <path class="draw-on-scroll" d="M 5,5 Q 50,8 95,3" stroke="currentColor" stroke-width="3.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </h2>
+                    <div class="space-y-1 font-mono text-xs text-black/85 relative pb-8 md:pb-0">
+                        <p class="font-bold">ROLE: SOFTWARE DEVELOPMENT INTERN</p>
+                        <p>PERIOD: NOVEMBER 2025 — FEBRUARY 2026</p>
+                        <!-- Hand-drawn markup arrow pointing to duration -->
+                        <div
+                            class="absolute left-0 -bottom-8 flex items-center gap-1 text-black/70 select-none pointer-events-none">
+                            <svg class="w-6 h-6 transform -rotate-90" viewBox="0 0 80 60" fill="none">
+                                <path class="draw-on-scroll" d="M 65,15 Q 40,25 15,35" stroke="currentColor" stroke-width="3.5"
+                                    stroke-linecap="round" />
+                                <path class="draw-on-scroll" d="M 12,38 C 18,34 24,32 28,31" stroke="currentColor" stroke-width="3.5"
+                                    stroke-linecap="round" />
+                                <path class="draw-on-scroll" d="M 12,38 C 15,32 17,26 17,22" stroke="currentColor" stroke-width="3.5"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="font-handwritten text-lg font-bold whitespace-nowrap">3-month SDE role!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 space-y-8 relative" data-aos="fade-left">
+                    <!-- Hand-drawn annotation pointing to quote -->
+                    <div
+                        class="absolute -right-16 -top-12 hidden xl:flex flex-col items-center gap-1 text-black/60 select-none pointer-events-none w-44">
+                        <span class="font-handwritten text-lg font-bold leading-tight text-center">core lesson I carry
+                            to every codebase!</span>
+                        <svg class="w-8 h-8 transform rotate-90" viewBox="0 0 80 60" fill="none">
+                            <path class="draw-on-scroll" d="M 15,15 Q 40,25 65,45" stroke="currentColor" stroke-width="3"
+                                stroke-linecap="round" />
+                            <path class="draw-on-scroll" d="M 68,48 C 62,42 56,40 52,39" stroke="currentColor" stroke-width="3"
+                                stroke-linecap="round" />
+                            <path class="draw-on-scroll" d="M 68,48 C 65,38 63,32 63,28" stroke="currentColor" stroke-width="3"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <p class="font-serif italic text-2xl md:text-3xl text-black leading-relaxed">
+                        "In production, your code becomes part of someone else's system. This requires prioritizing
+                        readability, testing boundaries, and architectural documentation."
+                    </p>
+                    <div class="h-px bg-black/25 w-full my-6"></div>
+                    <div class="space-y-4 font-sans text-sm sm:text-base font-normal leading-relaxed text-black/95">
+                        <p>
+                            During my time at CEHpoint, I actively contributed to production systems handling Employee
+                            Management workflows and ordering/logistics platforms. This direct experience taught me the
+                            rigor required to build code that integrates smoothly into larger corporate ecosystems.
+                        </p>
+                        <p>
+                            My day-to-day focus was centered on constructing reliable REST APIs, implementing database
+                            schema validations, writing unit tests to protect existing features, and learning how
+                            database queries behave under load. Collaborating with senior engineers reinforced the
+                            importance of writing self-documenting code and prioritizing system performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DETAILS CARE SECTION (QUOTE CALLOUT) -->
+        <section
+            class="py-16 md:py-20 bg-[#132521] border-t border-b border-sage/10 text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-6 space-y-6" data-aos="zoom-in">
+                <span class="text-xs uppercase tracking-[0.3em] font-extrabold text-sage block">Attention to
+                    Detail</span>
+                <p class="font-serif italic text-2xl sm:text-3xl text-cream leading-relaxed max-w-3xl mx-auto">
+                    "Some of my favorite engineering work is database indexes, transactional isolation boundaries, and
+                    Docker environments configuration — details that keep applications scaling quietly."
+                </p>
+            </div>
+        </section>
+
+        <!-- MISCELLANEOUS DETAILS & MISSION -->
+        <section class="py-16 md:py-20 px-6 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start" data-aos="fade-up">
+                <!-- Mission -->
+                <div class="md:col-span-5 space-y-4">
+                    <span class="text-xs uppercase tracking-[0.3em] font-extrabold text-sage block">Mission</span>
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">What I Look For</h2>
+                    <p class="text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+                        I seek projects focusing on real engineering problems, clean distributed systems, robust
+                        database schemas, performance, and security. I want to build systems that are readable,
+                        reproducible, and reliable.
+                    </p>
+                </div>
+
+                <!-- Academic/Solving Details -->
+                <div class="md:col-span-7 space-y-6">
+                    <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Beyond Projects</h2>
+
+                    <div class="space-y-4 text-slate-450 font-sans text-sm sm:text-base font-light leading-relaxed">
+                        <p>
+                            I hold an academic foundation with a <strong class="text-white font-medium">B.Tech in
+                                Information Technology from Bengal College of Engineering and Technology (2022 —
+                                2026)</strong>.
+                        </p>
+                        <p>
+                            I have solved <strong class="text-white font-medium">150+ DSA problems</strong> to reason
+                            about complexity, runtime bounds, and spatial constraints. I was also a <strong
+                                class="text-white font-medium">Hackathon Finalist at AIExplain 2024</strong>, delivering
+                            medical dispatch architectures under deadline constraints.
+                        </p>
+                        <p>
+                            Technology, libraries, and frameworks change continuously. I balance new tools learning by
+                            maintaining a strong grip on computer science fundamentals: networks, compilers, and
+                            databases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION (LET'S BUILD - LIGHT EDITORIAL CARD) -->
+        <section class="py-16 md:py-20 px-6 max-w-4xl mx-auto text-center" data-aos="zoom-in">
+            <div class="p-12 sm:p-16 rounded-[2.5rem] bg-cream border border-sage/40 shadow-2xl relative text-deep">
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl mb-6">Let's Build Something</h2>
+                <p
+                    class="text-deep/80 font-sans font-light text-sm sm:text-base leading-relaxed max-w-2xl mx-auto mb-10">
+                    If you're working on an interesting product, solving a difficult engineering problem, or simply want
+                    to talk about software, architecture, or technology, I'd be happy to connect.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center relative">
+                    <!-- Hand-drawn markup arrow pointing to Explore Projects -->
+                    <div
+                        class="absolute -top-12 left-10 lg:left-24 hidden md:flex items-center gap-1 text-deep/60 select-none pointer-events-none">
+                        <span class="font-handwritten text-xl font-bold -rotate-6">check my work!</span>
+                        <svg class="w-8 h-8 transform -rotate-12" viewBox="0 0 80 60" fill="none">
+                            <path class="draw-on-scroll" d="M 15,15 Q 40,25 65,45" stroke="currentColor" stroke-width="3.5"
+                                stroke-linecap="round" />
+                            <path class="draw-on-scroll" d="M 68,48 C 62,42 56,40 52,39" stroke="currentColor" stroke-width="3.5"
+                                stroke-linecap="round" />
+                            <path class="draw-on-scroll" d="M 68,48 C 65,38 63,32 63,28" stroke="currentColor" stroke-width="3.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <a href="projects.html"
+                        class="px-6 py-3 rounded-full bg-deep hover:bg-forest text-cream font-sans text-xs font-bold uppercase tracking-wider transition-all shadow-md relative z-10">
+                        Explore Projects
+                    </a>
+                    <a href="https://github.com/Sarthak4321" target="_blank"
+                        class="px-6 py-3 rounded-full bg-deep/5 border border-deep/15 text-deep font-sans text-xs font-bold uppercase tracking-wider hover:bg-deep/10 transition-all">
+                        GitHub Profile
+                    </a>
+                    <a href="https://www.linkedin.com/in/sarthak-roy-1b290822a" target="_blank"
+                        class="px-6 py-3 rounded-full bg-deep/5 border border-deep/15 text-deep font-sans text-xs font-bold uppercase tracking-wider hover:bg-deep/10 transition-all">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0c1815] pt-28 pb-12 px-6 lg:px-12 text-white overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <!-- 2-Column Asymmetric Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
+                <!-- Brand Info -->
+                <div class="md:col-span-8 flex flex-col gap-6">
+                    <h2 class="text-3xl font-display font-extrabold text-white">Sarthak<span class="text-sage">.</span>
+                    </h2>
+                    <p class="text-slate-400 leading-relaxed max-w-md font-light text-sm md:text-base font-sans">
+                        Building the future of web experiences with precision, passion, and high-performance
+                        engineering. Fusing beautiful aesthetics with secure, scalable logic.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/Sarthak4321" target="_blank"
+                            class="w-11 h-11 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sarthak-roy-1b290822a" target="_blank"
+                            class="w-11 h-11 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="https://x.com/isarthakroy" target="_blank"
+                            class="w-11 h-11 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:scale-105 hover:-translate-y-1 transition-all duration-300">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation List -->
+                <div class="md:col-span-4 md:ml-auto">
+                    <span
+                        class="text-[10px] uppercase tracking-[0.25em] font-sans font-bold text-slate-500 mb-6 block">Quick
+                        Navigation</span>
+                    <ul class="space-y-4 text-slate-400 font-sans text-sm font-semibold">
+                        <li><a href="index.html" class="hover:text-white transition-colors duration-300">Home</a>
+                        </li>
+                        <li><a href="projects.html" class="hover:text-white transition-colors duration-300">Projects</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Blog</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors duration-300">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Signature Watermark Backdrop with Scroll Reveal -->
+            <div class="relative overflow-hidden w-full flex justify-center py-6 my-4 select-none pointer-events-none">
+                <div class="overflow-hidden w-full flex justify-center py-2">
+                    <div id="footer-reveal-text"
+                        class="font-display font-black text-[11vw] uppercase leading-none tracking-tighter text-white will-change-transform text-center w-full">
+                        SARTHAK
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row copyright info -->
+            <div
+                class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-sans font-medium">
+                <p>© 2026 Sarthak Roy. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // AOS Initialization
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Butter-Smooth Lerped Scroll Parallax Animation (Native Browser Scroll compatible)
+        let targetScroll = 0;
+        let currentScroll = 0;
+        const scrollEase = 0.07;
+
+        window.addEventListener('scroll', () => {
+            targetScroll = window.scrollY;
+        }, { passive: true });
+
+        function updateParallax() {
+            currentScroll += (targetScroll - currentScroll) * scrollEase;
+
+            // Parallax on Footer Reveal
+            const revealText = document.getElementById('footer-reveal-text');
+            if (revealText) {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const distanceToBottom = maxScroll - currentScroll;
+                const proximity = Math.max(0, Math.min(1, 1 - (distanceToBottom / 400)));
+                const translateYPercent = 100 * (1 - proximity);
+                revealText.style.transform = `translateY(${translateYPercent}%)`;
+                revealText.style.opacity = proximity;
+            }
+
+            // Parallax on About Hero Backdrop Text
+            const aboutBackdrop = document.getElementById('aboutBackdrop');
+            if (aboutBackdrop && currentScroll < window.innerHeight) {
+                const translateVal = currentScroll * 0.12;
+                const scaleVal = 1 + (currentScroll * 0.0003);
+                aboutBackdrop.style.transform = `translateY(${translateVal}px) scale(${scaleVal})`;
+            }
+
+            requestAnimationFrame(updateParallax);
+        }
+
+        requestAnimationFrame(updateParallax);
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('scale-y-0', 'opacity-0');
+                    mobileMenu.classList.add('scale-y-100', 'opacity-100');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            });
+        });
+    </script>
+</body>
+
+</html>
