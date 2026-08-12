@@ -2,7 +2,10 @@
   "name": "tailwindprac",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'Static HTML + Tailwind site — nothing to build'"
+    "start": "npx -y serve distribution -l 5000",
+    "dev": "npx -y serve distribution -l 5000",
+    "tailwind:watch": "tailwindcss -i ./distribution/input.css -o ./distribution/style.css --watch",
+    "build": "tailwindcss -i ./distribution/input.css -o ./distribution/style.css"
   },
   "devDependencies": {
     "tailwindcss": "^4.1.11"

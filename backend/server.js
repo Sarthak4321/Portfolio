@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const path = require('path');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const db = require('./model/db');
@@ -11,7 +12,7 @@ const PORT = 3000;
 // const PORT = 'https://portfolio-ghrm-n0szsd2y8-sarthak4321s-projects.vercel.app/';
 
 // Static files
-app.use(express.static('distribution'));
+app.use(express.static(path.join(__dirname, '../frontend/distribution')));
 
 // Middleware
 app.use(bodyParser.json());
@@ -80,26 +81,13 @@ app.post('/massage', async (req, res) => {
   `
         });
 
-
-
-    if (res.ok) {
-        alert("✅ Password sent to your email!");
-        setEmail("");
-        onClose();
-      } else {
-        alert("❌ Failed to send email. Try again.");
-      }
-
-
-    // 2. Notify admin
-    await transporter.sendMail({
-      from: `"Sarthak's Website" <${process.env.EMAIL_USER}>`,
-      to: process.env.ADMIN_EMAIL,
-      subject: 'New message received',
-      html: `<p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br>${text}</p>`,
-    });
-=======
->>>>>>> 8d163e88409553fab8d744162979ef2a5898997a
+        // 2. Notify admin
+        await transporter.sendMail({
+            from: `"Sarthak's Website" <${process.env.EMAIL_USER}>`,
+            to: process.env.ADMIN_EMAIL,
+            subject: 'New message received',
+            html: `<p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br>${text}</p>`,
+        });
 
 
 
