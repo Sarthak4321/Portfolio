@@ -125,6 +125,67 @@
             -webkit-text-fill-color: transparent;
             animation: shimmer-sweep 10s linear infinite;
         }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.4) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite ease-in-out;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -150%;
+            }
+
+            45% {
+                left: 150%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .anim-line-1 {
+            stroke-dasharray: 8;
+            stroke-dashoffset: 8;
+            animation: drawLine 2s infinite ease-in-out;
+        }
+
+        .anim-line-2 {
+            stroke-dasharray: 6;
+            stroke-dashoffset: 6;
+            animation: drawLine 2s infinite ease-in-out;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes drawLine {
+
+            0%,
+            100% {
+                stroke-dashoffset: 8;
+                opacity: 0.3;
+            }
+
+            50% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
     </style>
 
     <script>
@@ -256,6 +317,48 @@
                     class="h-[80vh] xs:h-[82vh] sm:h-[450px] md:h-[550px] lg:h-[620px] w-auto max-w-none sm:max-w-full shrink-0 object-contain relative z-10 filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
                     src="minee.webp" alt="Sarthak Roy"
                     style="transform-style: preserve-3d; will-change: transform, filter;" />
+            </div>
+        </section>
+
+        <!-- RESUME DOWNLOAD BANNER -->
+        <section class="w-full bg-[#0b0c10] border-t border-b border-emerald-950/20 py-8 relative overflow-hidden z-20">
+            <!-- Pulsing Ambient Radial Glow -->
+            <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_25%_50%,rgba(165,214,167,0.06),transparent_50%)] pointer-events-none animate-pulse">
+            </div>
+
+            <div class="max-w-5xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row justify-between items-center gap-6 relative z-10"
+                data-aos="fade-up">
+                <div class="flex items-center gap-4 text-center sm:text-left">
+                    <!-- Glowing Animated Document Icon -->
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-[#A5D6A7]/10 flex items-center justify-center text-[#A5D6A7] border border-[#A5D6A7]/20 shadow-[0_0_15px_rgba(165,214,167,0.15)] flex-shrink-0">
+                        <svg class="w-6 h-6 text-[#A5D6A7]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line class="anim-line-1" x1="8" y1="13" x2="16" y2="13" />
+                            <line class="anim-line-2" x1="8" y1="17" x2="14" y2="17" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span
+                            class="text-[9px] uppercase tracking-[0.3em] text-[#A5D6A7] font-bold block mb-1">Curriculum
+                            Vitae</span>
+                        <h3 class="font-sans font-extrabold text-white text-base tracking-tight">Looking for Sarthak's
+                            technical dossier?</h3>
+                        <p class="text-xs text-slate-400">Download the compiled PDF resume detailing software systems
+                            and accomplishments.</p>
+                    </div>
+                </div>
+                <a href="SARTHAK_ROY.pdf" download="SARTHAK_ROY_Resume.pdf"
+                    class="shimmer-btn flex items-center gap-2 bg-[#A5D6A7] text-[#050507] hover:bg-white hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md">
+                    <span>Download Resume</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </a>
             </div>
         </section>
 
@@ -740,7 +843,8 @@
                             </li>
                             <li><a href="projects.html"
                                     class="hover:text-white transition-colors duration-300">Projects</a></li>
-                            <li><a href="blog.html" class="hover:text-white transition-colors duration-300">Blog</a></li>
+                            <li><a href="blog.html" class="hover:text-white transition-colors duration-300">Blog</a>
+                            </li>
                             <li><a href="about.html" class="hover:text-white transition-colors duration-300">About</a>
                             </li>
                         </ul>
