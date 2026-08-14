@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications Manager | Sarthak Roy</title>
+    <meta name="description" content="Manage and publish blog posts for Sarthak Roy's portfolio blog.">
+
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.css">
+
+    <style>
+        :root {
+            --bg-color: #F4F6F3;
+            --text-dark: #2C5745;
+            --text-muted: #5A7065;
+            --accent-orange: #F05454;
+            --border-color: #D9DDD9;
+            --sidebar-bg: #1D4533;
+        }
+
+        body {
+            font-family: 'Geist', 'Geist Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        .font-serif {
+            font-family: 'Geist', 'Geist Sans', sans-serif;
+        }
+
+        .mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Tactical Paper Styles */
+        .paper-ruled-style {
+            background-image: linear-gradient(90deg, transparent 79px, rgba(220, 80, 80, 0.25) 1px, transparent 80px), linear-gradient(rgba(44, 87, 69, 0.08) 1px, transparent 1px) !important;
+            background-size: 100% 100%, 100% 28px !important;
+        }
+
+        .paper-ruled-style textarea {
+            line-height: 28px !important;
+        }
+
+        .paper-grid-style {
+            background-image: linear-gradient(rgba(44, 87, 69, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(44, 87, 69, 0.06) 1px, transparent 1px) !important;
+            background-size: 20px 20px !important;
+        }
+
+        .paper-dots-style {
+            background-image: radial-gradient(rgba(44, 87, 69, 0.15) 1px, transparent 1px) !important;
+            background-size: 20px 20px !important;
+        }
+
+        .paper-blank-style {
+            background-image: none !important;
+        }
+
+        /* Hide scrollbars style */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none !important;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C2C7C0;
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-dark);
+        }
+
+        /* Subtle Fade In */
+        @keyframes subtleFade {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-subtle {
+            animation: subtleFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Sleek Sidebar Active Link */
+        .sidebar-active {
+            font-weight: 750;
+            color: #ffffff !important;
+        }
+
+        .sidebar-active::after {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 25%;
+            height: 50%;
+            width: 3px;
+            background-color: #ffffff;
+            /* White active bar */
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Slide-out Panel Overlay */
+        .preview-drawer {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .preview-drawer.open {
+            transform: translateX(0);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkGreen: '#2C5745',
+                        mutedGreen: '#5A7065',
+                        accentOrange: '#F05454',
+                        bgGreen: '#F4F6F3',
+                        mintAccent: '#67C090',
+                    },
+                    fontFamily: {
+                        sans: ['Geist', 'Geist Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="h-full flex overflow-hidden antialiased select-none">
+
+    <!-- SUBTLE TOAST NOTIFICATION -->
+    <div id="toast-notification"
+        class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 bg-[var(--sidebar-bg)] border border-[var(--accent-orange)]/30 text-[#F4F6F3] text-xs font-semibold px-5 py-3 rounded-full shadow-xl opacity-0 transition-all duration-300 translate-y-2 pointer-events-none">
+        Draft saved successfully
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="hidden md:flex w-60 bg-[var(--sidebar-bg)] border-r border-[#2C5745]/30 flex flex-col h-full flex-shrink-0 z-30">
+        <!-- Brand Signature -->
+        <div class="h-20 flex items-center px-8 border-b border-[#2C5745]/30 justify-between">
+            <a href="index.html" class="text-white font-sans font-bold text-base tracking-tighter">Sarthak<span
+                    class="text-accentOrange">.</span>Workspace</a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-grow py-8 px-6 space-y-8 overflow-y-auto">
+            <div class="space-y-3.5">
+                <span
+                    class="text-[15px] uppercase tracking-widest text-white/50 font-bold block mb-1">Publications</span>
+
+                <button onclick="switchTab('posts')" id="nav-posts"
+                    class="w-full relative flex items-center gap-3 py-1.5 text-s text-white/70 hover:text-white transition-colors text-left sidebar-active">
+                    <span>All Articles</span>
+                </button>
+
+                <button onclick="switchTab('write')" id="nav-write"
+                    class="w-full relative flex items-center gap-3 py-1.5 text-s text-white/70 hover:text-white transition-colors text-left">
+                    <span>Compose Log</span>
+                </button>
+            </div>
+
+            <div class="space-y-3.5 pt-6 border-t border-[#2C5745]/30">
+                <span class="text-[15px] uppercase tracking-widest text-white/50 font-bold block mb-1">Workspace</span>
+
+                <button onclick="switchTab('authors')" id="nav-authors"
+                    class="w-full relative flex items-center gap-3 py-1.5 text-s text-white/70 hover:text-white transition-colors text-left">
+                    <span>Collaborators</span>
+                </button>
+
+                <button onclick="switchTab('settings')" id="nav-settings"
+                    class="w-full relative flex items-center gap-3 py-1.5 text-s text-white/70 hover:text-white transition-colors text-left">
+                    <span>Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Current Profile Widget -->
+        <div class="p-5 border-t border-[#2C5745]/30 flex items-center justify-between relative bg-[#132c21]/80">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <img id="active-author-avatar" src="self_5-removebg-preview.png" alt="Avatar"
+                    class="w-8 h-8 rounded-full object-cover grayscale">
+                <div class="min-w-0 leading-tight">
+                    <p id="active-author-name" class="text-[11px] font-bold text-white truncate">Sarthak Roy</p>
+                    <p id="active-author-role" class="text-[9px] text-white/70 truncate">Owner</p>
+                </div>
+            </div>
+
+            <button onclick="toggleAuthorDropdown()" class="text-white/70 hover:text-white p-1 transition-transform"
+                id="profile-arrow">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+
+            <!-- Dropdown Switch Panel -->
+            <div id="author-select-dropdown"
+                class="absolute bottom-16 left-5 right-5 bg-[#1D4533] border border-[#2C5745]/30 rounded-xl shadow-xl p-2 hidden z-50 flex flex-col gap-1">
+                <span class="px-2 py-1 text-[8px] font-bold text-white/50 uppercase tracking-wider block mb-1">Switch
+                    Writer Profile</span>
+                <div id="dropdown-author-list" class="max-h-36 overflow-y-auto flex flex-col gap-0.5">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- CONTENT DISPLAY PANEL -->
+    <main class="flex-grow flex flex-col h-full overflow-hidden relative">
+
+        <!-- Top Navigation Header -->
+        <header
+            class="h-20 bg-[#1D4533] border-b border-[#2C5745]/30 px-4 md:px-12 flex items-center justify-between flex-shrink-0 relative">
+            <div>
+                <h1 id="page-title" class="text-[13px] font-bold text-white tracking-tight">Publications</h1>
+                <p id="page-subtitle" class="text-[10px] text-white/70 mt-0.5 hidden sm:block">Manage posts on Sarthak Roy's portfolio blog.</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="blog.html" target="_blank"
+                    class="p-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-white/80 hover:text-white transition-all flex items-center gap-1.5 text-xs font-semibold"
+                    title="View Public Blog">
+                    <span class="hidden sm:inline">View Blog</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+                <button onclick="quickNewPost()"
+                    class="hidden sm:block text-xs bg-white text-[#1D4533] hover:bg-white/90 font-bold px-3 py-1.5 rounded-lg transition-colors">
+                    + Compose Post
+                </button>
+
+                <!-- Mobile Active Profile Button Widget -->
+                <div class="md:hidden relative flex items-center">
+                    <button onclick="toggleMobileProfileDropdown()" class="flex items-center focus:outline-none rounded-full p-0.5 border border-white/20 hover:border-white/50 transition-colors" id="mobile-profile-arrow">
+                        <img id="mobile-active-avatar" src="self_5-removebg-preview.png" alt="Avatar" class="w-8 h-8 rounded-full object-cover grayscale">
+                    </button>
+                    <!-- Mobile Dropdown Selector Panel -->
+                    <div id="mobile-author-select-dropdown" class="absolute right-0 top-12 bg-[#1D4533] border border-[#2C5745]/30 rounded-xl shadow-xl p-2 hidden z-50 flex flex-col gap-1 w-44">
+                        <span class="px-2 py-1 text-[8px] font-bold text-white/50 uppercase tracking-wider block mb-1">Switch Profile</span>
+                        <div id="mobile-dropdown-author-list" class="max-h-36 overflow-y-auto flex flex-col gap-0.5">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUBTLE CONTENT WINDOW -->
+        <div class="flex-grow overflow-y-auto px-4 py-6 md:px-12 md:py-10 pb-24 md:pb-10">
+
+            <!-- TAB 1: PUBLICATIONS LIST -->
+            <section id="tab-posts" class="tab-content animate-subtle space-y-6 block">
+                <!-- Search & Filters -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[var(--border-color)]/60 pb-4">
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="posts-search-input" oninput="runFilterPosts()"
+                            placeholder="Search publications..."
+                            class="w-full text-xs py-2 bg-transparent focus:outline-none border-b border-[var(--border-color)]/60 focus:border-darkGreen text-darkGreen placeholder-slate-500">
+                    </div>
+
+                    <div class="flex items-center justify-between sm:justify-end gap-5 w-full sm:w-auto">
+                        <select id="posts-category-select" onchange="runFilterPosts()"
+                            class="text-[11px] bg-transparent border-0 text-mutedGreen hover:text-darkGreen focus:outline-none cursor-pointer">
+                            <option value="all">All Categories</option>
+                            <option value="systems">System Design</option>
+                            <option value="backend">Backend</option>
+                            <option value="devops">DevOps</option>
+                            <option value="databases">Databases</option>
+                            <option value="fullstack">Full Stack</option>
+                            <option value="ai">AI/ML</option>
+                        </select>
+
+                        <select id="posts-status-select" onchange="runFilterPosts()"
+                            class="text-[11px] bg-transparent border-0 text-mutedGreen hover:text-darkGreen focus:outline-none cursor-pointer">
+                            <option value="all">All Statuses</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Clutter-free publications feed -->
+                <div id="posts-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Styled Empty State -->
+                <div id="posts-empty-message"
+                    class="py-16 text-center text-mutedGreen text-xs flex flex-col items-center justify-center gap-2 hidden">
+                    <svg class="w-8 h-8 text-mutedGreen/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span class="font-mono text-[10px]">[ No publications match your query ]</span>
+                </div>
+            </section>
+
+
+            <!-- TAB 2: COMPOSE LOG EDITOR (Distraction-Free Workspace) -->
+            <section id="tab-write" class="tab-content animate-subtle hidden max-w-4xl mx-auto space-y-8">
+                <form id="editor-form" onsubmit="savePost(event)" class="space-y-8">
+                    <!-- Editor sub-tabs (Segmented Controls Pill bar) -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[var(--border-color)]/60 pb-4">
+                        <div class="flex bg-slate-200/80 p-1 rounded-xl w-full md:w-auto self-start shadow-inner">
+                            <button type="button" onclick="setEditorPane('write')" id="pane-btn-write"
+                                class="flex-grow md:flex-initial text-center text-xs py-1.5 px-4 rounded-lg font-bold bg-[#1D4533] text-white shadow-sm transition-all duration-200">Editor</button>
+                            <button type="button" onclick="setEditorPane('preview')" id="pane-btn-preview"
+                                class="flex-grow md:flex-initial text-center text-xs py-1.5 px-4 rounded-lg font-medium text-slate-600 hover:text-slate-800 transition-all duration-200">Live Preview</button>
+                            <button type="button" onclick="setEditorPane('metadata')" id="pane-btn-metadata"
+                                class="flex-grow md:flex-initial text-center text-xs py-1.5 px-4 rounded-lg font-medium text-slate-600 hover:text-slate-800 transition-all duration-200">Metadata Settings</button>
+                        </div>
+
+                        <!-- Action buttons -->
+                        <div class="flex items-center justify-between md:justify-end gap-3 w-full md:w-auto">
+                            <button type="button" onclick="cancelEdit()"
+                                class="text-xs text-mutedGreen hover:text-darkGreen font-semibold px-2 py-1">Cancel</button>
+                            <div class="flex items-center gap-2">
+                                <button type="submit" name="status" value="draft"
+                                    class="text-xs border border-[var(--border-color)] text-darkGreen hover:bg-[#2D5A46]/10 px-3.5 py-1.5 rounded-lg font-medium transition-all">Save Draft</button>
+                                <button type="submit" name="status" value="published"
+                                    class="text-xs bg-darkGreen text-white hover:opacity-90 px-3.5 py-1.5 rounded-lg font-semibold shadow-sm transition-all">Publish Log</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel A: Main Writing Sheet -->
+                    <div id="editor-pane-write" class="editor-pane space-y-6 block relative">
+                        
+                        <!-- Editor Toolbar Control Hub (Sleek Single Row Toolbar) -->
+                        <div class="relative z-30 flex items-center justify-between bg-white/70 backdrop-blur-md border border-[#2C5745]/10 rounded-2xl px-4 py-2.5 shadow-sm text-xs text-[#2C5745]">
+                            <!-- Markdown Toolkit -->
+                            <div class="flex items-center gap-4 overflow-x-auto no-scrollbar py-0.5 flex-grow pr-3">
+                                <button type="button" onclick="insertMarkdown('**', '**')" class="hover:opacity-100 opacity-80 font-bold shrink-0">Bold</button>
+                                <button type="button" onclick="insertMarkdown('*', '*')" class="hover:opacity-100 opacity-80 italic shrink-0">Italic</button>
+                                <button type="button" onclick="insertMarkdown('## ', '')" class="hover:opacity-100 opacity-80 font-mono shrink-0">Header</button>
+                                <button type="button" onclick="insertMarkdown('`', '`')" class="hover:opacity-100 opacity-80 font-mono shrink-0">Code</button>
+                                <button type="button" onclick="insertMarkdown('[', '](url)')" class="hover:opacity-100 opacity-80 shrink-0">Link</button>
+                            </div>
+                            
+                            <!-- Stats and Toggle Settings -->
+                            <div class="flex items-center gap-3 shrink-0 border-l border-[#2C5745]/15 pl-3">
+                                <div class="text-[9px] font-mono opacity-70 flex items-center gap-1.5 shrink-0">
+                                    <span id="editor-words-count">0 words</span>
+                                </div>
+                                <span class="opacity-30 select-none">|</span>
+                                <button type="button" onclick="togglePaperSettingsPopover(event)" class="p-1 rounded-lg hover:bg-black/5 focus:outline-none transition-colors flex items-center justify-center shrink-0" title="Paper Customizer">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Popover settings selector card -->
+                            <div id="paper-settings-popover" class="absolute right-0 top-12 bg-white border border-[#2C5745]/20 rounded-xl shadow-xl p-4 hidden z-50 w-64 flex flex-col gap-3.5 text-darkGreen">
+                                <h4 class="text-[10px] font-bold uppercase tracking-wider opacity-60">Paper Customizer</h4>
+                                
+                                <!-- Layout selector -->
+                                <div class="flex items-center justify-between text-xs">
+                                    <span>Layout Grid:</span>
+                                    <select onchange="applyPaperStyle(this.value)" id="paper-style-select"
+                                        class="bg-slate-100 border border-slate-200 rounded-md font-bold focus:outline-none py-1 px-2 cursor-pointer text-xs">
+                                        <option value="blank">Blank Sheet</option>
+                                        <option value="ruled">Ruled Notepad</option>
+                                        <option value="grid" selected>Grid Paper</option>
+                                        <option value="dots">Dot Matrix</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Size selector -->
+                                <div class="flex items-center justify-between text-xs">
+                                    <span>Text Size:</span>
+                                    <select onchange="applyPaperFontSize(this.value)" id="paper-size-select"
+                                        class="bg-slate-100 border border-slate-200 rounded-md font-bold focus:outline-none py-1 px-2 cursor-pointer text-xs">
+                                        <option value="sm">Small</option>
+                                        <option value="md" selected>Medium</option>
+                                        <option value="lg">Large</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Tone Selector -->
+                                <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+                                    <span>Paper Tone:</span>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button" onclick="applyPaperTone('ivory')"
+                                            class="w-4 h-4 rounded-full bg-[#FDFBF7] border border-black/10 focus:outline-none transition-transform hover:scale-110"
+                                            title="Ivory Cream"></button>
+                                        <button type="button" onclick="applyPaperTone('slate')"
+                                            class="w-4 h-4 rounded-full bg-[#FAFAFA] border border-black/10 focus:outline-none transition-transform hover:scale-110"
+                                            title="Slate White"></button>
+                                        <button type="button" onclick="applyPaperTone('sage')"
+                                            class="w-4 h-4 rounded-full bg-[#F2F6F3] border border-black/10 focus:outline-none transition-transform hover:scale-110"
+                                            title="Sage Mist"></button>
+                                        <button type="button" onclick="applyPaperTone('lavender')"
+                                            class="w-4 h-4 rounded-full bg-[#F7F7FD] border border-black/10 focus:outline-none transition-transform hover:scale-110"
+                                            title="Lavender"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- THE TACTILE PAPER SHEET -->
+                        <div id="paper-sheet"
+                            class="paper-grid-style relative w-full bg-[#FDFBF7] text-[#2B251F] rounded-2xl p-4 sm:p-12 min-h-[550px] shadow-[0_4px_6px_rgba(0,0,0,0.05)] sm:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),_0_10px_15px_-3px_rgba(0,0,0,0.05),_4px_4px_0_0_#D9DDD9,_8px_8px_0_0_#E1E6E1] border border-[#2C5745]/15 transition-all duration-300 flex flex-col gap-6">
+
+                            <!-- Left margins / binder rings simulation -->
+                            <div
+                                class="absolute left-0 top-6 bottom-6 w-8 flex flex-col justify-around pointer-events-none z-10 hidden sm:flex">
+                                <div
+                                    class="w-3.5 h-3.5 rounded-full bg-slate-300 shadow-inner border border-slate-400/40 opacity-70 ml-2">
+                                </div>
+                                <div
+                                    class="w-3.5 h-3.5 rounded-full bg-slate-300 shadow-inner border border-slate-400/40 opacity-70 ml-2">
+                                </div>
+                                <div
+                                    class="w-3.5 h-3.5 rounded-full bg-slate-300 shadow-inner border border-slate-400/40 opacity-70 ml-2">
+                                </div>
+                            </div>
+
+                            <!-- Post Title Input -->
+                            <input type="text" id="post-title" required oninput="generateSlug()"
+                                placeholder="Title of your post..."
+                                class="w-full font-sans text-2xl sm:text-3xl font-bold bg-transparent border-0 focus:outline-none focus:ring-0 leading-tight text-current placeholder-current/30 border-b border-current/15 pb-4 select-text">
+
+                            <!-- Textarea field -->
+                            <textarea id="post-markdown" required oninput="onEditorInput()"
+                                placeholder="Start drafting in Markdown..."
+                                class="w-full flex-grow min-h-[380px] text-sm bg-transparent border-0 focus:outline-none focus:ring-0 text-current resize-y leading-relaxed font-normal placeholder-current/30 select-text"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Panel B: Render Preview Pane -->
+                    <div id="editor-pane-preview"
+                        class="editor-pane hidden prose prose-invert max-w-none text-darkGreen">
+                        <div class="border-b border-[var(--border-color)]/60 pb-5 mb-6">
+                            <!-- Dynamic preview cover image -->
+                            <div id="preview-cover-container"
+                                class="w-full h-44 rounded-xl overflow-hidden mb-6 hidden">
+                                <img id="preview-cover" src="" alt="Cover" class="w-full h-full object-cover">
+                            </div>
+                            <h1 id="preview-title" class="font-sans text-3xl text-darkGreen mb-2">Untitled Post</h1>
+                            <div class="flex items-center gap-2 text-xs text-mutedGreen font-medium">
+                                <span id="preview-date">August 14, 2026</span>
+                                <span>•</span>
+                                <span id="preview-author">Sarthak Roy</span>
+                                <span>•</span>
+                                <span id="preview-category"
+                                    class="font-bold text-accentOrange uppercase tracking-wider text-[10px]">Backend</span>
+                            </div>
+                        </div>
+
+                        <div id="markdown-html-preview"
+                            class="text-sm leading-relaxed space-y-4 max-h-[480px] overflow-y-auto pr-4 select-text">
+                            <!-- Injected markdown preview content -->
+                        </div>
+                    </div>
+
+                    <!-- Panel C: Config settings drawer -->
+                    <div id="editor-pane-metadata"
+                        class="editor-pane hidden max-w-2xl space-y-6 py-6 bg-[#E1DFFB] text-[#1B1842] p-6 rounded-2xl border border-[#1B1842]/10 shadow-sm">
+                        <input type="hidden" id="edit-post-id" value="">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider">URL Slug</label>
+                                <input type="text" id="post-slug" readonly
+                                    class="w-full text-xs font-mono py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842]/80 focus:outline-none select-all">
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider">Category</label>
+                                <select id="post-category" required
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] focus:outline-none cursor-pointer">
+                                    <option value="systems" class="bg-[#D2CEF6] text-[#1B1842]">System Design</option>
+                                    <option value="backend" selected class="bg-[#D2CEF6] text-[#1B1842]">Backend
+                                    </option>
+                                    <option value="devops" class="bg-[#D2CEF6] text-[#1B1842]">DevOps</option>
+                                    <option value="databases" class="bg-[#D2CEF6] text-[#1B1842]">Databases</option>
+                                    <option value="fullstack" class="bg-[#D2CEF6] text-[#1B1842]">Full Stack</option>
+                                    <option value="ai" class="bg-[#D2CEF6] text-[#1B1842]">AI/ML</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider">Author
+                                    Account</label>
+                                <select id="post-author" required
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] focus:outline-none cursor-pointer">
+                                    <!-- Populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider">Publish
+                                    Date</label>
+                                <input type="date" id="post-date"
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Cover Image Uploader Simulation -->
+                        <div class="space-y-2">
+                            <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider block">Cover
+                                Image</label>
+                            <div class="flex gap-4 items-center">
+                                <input type="url" id="post-cover" oninput="onCoverUrlChange()"
+                                    placeholder="Cover Image URL (optional)"
+                                    class="flex-grow text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none">
+                                <button type="button" onclick="generateCoverImage()"
+                                    class="text-[10px] font-bold text-[#1B1842] border border-[#1B1842]/20 px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/40 shrink-0 transition-colors">
+                                    Generate Cover
+                                </button>
+                            </div>
+                            <!-- Image thumbnail preview box -->
+                            <div id="cover-thumbnail-box"
+                                class="w-32 h-20 rounded-lg overflow-hidden border border-[#1B1842]/15 hidden mt-2">
+                                <img id="cover-thumbnail" src="" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[9px] uppercase font-bold opacity-75 tracking-wider">Brief Excerpt
+                                    Description</label>
+                                <button type="button" onclick="autoGenerateExcerpt()"
+                                    class="text-[9px] font-bold text-[#584FF3] hover:underline">Generate
+                                    Excerpt</button>
+                            </div>
+                            <textarea id="post-excerpt" required
+                                placeholder="A short 1 sentence summary for list views..."
+                                class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none min-h-[50px] resize-none"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+
+            <!-- TAB 3: COLLABORATORS DIRECTORY -->
+            <section id="tab-authors" class="tab-content animate-subtle hidden max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                    <!-- Left: Collaborators card list -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <h3 class="text-xs uppercase font-bold text-darkGreen tracking-wider mb-2">Active Collaborators
+                        </h3>
+                        <div id="authors-simple-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Right: Inviting portal form -->
+                    <div
+                        class="lg:col-span-5 space-y-5 bg-[#E1DFFB] text-[#1B1842] p-6 rounded-2xl border border-[#1B1842]/10 shadow-sm">
+                        <div>
+                            <h3 class="text-sm font-extrabold tracking-tight">Register Collaborator</h3>
+                            <p class="text-[10px] opacity-75 mt-0.5">Allow others to publish articles under their
+                                workspace profile.</p>
+                        </div>
+
+                        <form id="author-register-form" onsubmit="addAuthor(event)" class="space-y-4">
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[8px] uppercase font-extrabold opacity-75 tracking-wider">Full
+                                    Name</label>
+                                <input type="text" id="new-author-name" required placeholder="e.g. Sarah Chen"
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none focus:border-[#584FF3]">
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[8px] uppercase font-extrabold opacity-75 tracking-wider">Role
+                                    Title</label>
+                                <input type="text" id="new-author-role" required placeholder="e.g. Guest Contributor"
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none focus:border-[#584FF3]">
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[8px] uppercase font-extrabold opacity-75 tracking-wider">Avatar URL
+                                    (optional)</label>
+                                <input type="url" id="new-author-avatar" placeholder="Leave empty for initials avatar"
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none focus:border-[#584FF3]">
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label
+                                    class="text-[8px] uppercase font-extrabold opacity-75 tracking-wider">Biography</label>
+                                <input type="text" id="new-author-bio" required placeholder="Brief writer summary..."
+                                    class="w-full text-xs py-2 bg-transparent border-b border-[#1B1842]/20 text-[#1B1842] placeholder-[#1B1842]/45 focus:outline-none focus:border-[#584FF3]">
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-[#1B1842] hover:opacity-90 text-white text-[11px] font-bold py-2.5 rounded-xl transition-all shadow-sm">
+                                Register Profile
+                            </button>
+                        </form>
+                    </div>
+            </section>
+
+            <!-- TAB 4: WORKSPACE SETTINGS -->
+            <section id="tab-settings" class="tab-content animate-subtle hidden max-w-4xl mx-auto space-y-6">
+                <h3 class="text-xs uppercase font-bold text-darkGreen tracking-wider mb-4">Workspace Settings</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Auto-save Card (Lavender) -->
+                    <div
+                        class="bg-[#D2CEF6] text-[#1B1842] rounded-2xl p-6 flex flex-col justify-between min-h-[160px] shadow-sm select-none">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span
+                                    class="text-[9px] uppercase tracking-widest font-extrabold opacity-75">Auto-Saving</span>
+                                <span class="text-xs font-mono font-bold text-[#584FF3]">01</span>
+                            </div>
+                            <h4 class="text-sm font-extrabold tracking-tight mt-2.5">Auto-Save Editor Canvas</h4>
+                            <p class="text-[10px] opacity-80 mt-1 leading-relaxed font-light">Automatically save draft
+                                posts in local cache as you compose.</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-[#1B1842]/10 mt-4">
+                            <span class="text-[9px] font-bold opacity-75">Status: Enabled</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="setting-autosave" checked class="sr-only peer">
+                                <div
+                                    class="w-8 h-4 bg-[#1B1842]/20 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-[#584FF3]">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Reset Cache Card (Lime) -->
+                    <div
+                        class="bg-[#E5F993] text-[#1E300B] rounded-2xl p-6 flex flex-col justify-between min-h-[160px] shadow-sm select-none">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] uppercase tracking-widest font-extrabold opacity-75">Workspace
+                                    cache</span>
+                                <span class="text-xs font-mono font-bold text-[#584FF3]">02</span>
+                            </div>
+                            <h4 class="text-sm font-extrabold tracking-tight mt-2.5">Restore Defaults</h4>
+                            <p class="text-[10px] opacity-80 mt-1 leading-relaxed font-light">Clear local browser
+                                database storage to recover primary blog post feeds.</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-[#1E300B]/10 mt-4">
+                            <span class="text-[9px] font-bold opacity-75">Risk: Destructive</span>
+                            <button onclick="resetWorkspaceToDefault()"
+                                class="px-3 py-1 text-[9px] font-extrabold border border-rose-600/30 text-rose-800 bg-rose-500/10 hover:bg-rose-500/20 rounded uppercase tracking-wider transition-colors">
+                                Reset Cache
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <div id="preview-drawer"
+            class="preview-drawer fixed right-0 top-0 h-full w-full sm:w-[85%] md:w-[45%] shadow-2xl bg-[var(--sidebar-bg)] border-l border-[var(--border-color)] z-50 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <div
+                class="h-20 border-b border-[var(--border-color)]/60 px-8 flex items-center justify-between bg-transparent flex-shrink-0">
+                <span class="text-[10px] font-mono text-mutedGreen">[ READING PREVIEW ]</span>
+                <button onclick="closePreviewDrawer()"
+                    class="text-xs text-mutedGreen hover:text-darkGreen font-mono uppercase tracking-wider flex items-center gap-1 font-bold">
+                    Close ✕
+                </button>
+            </div>
+
+            <!-- Cover image placeholder -->
+            <div id="drawer-cover-box" class="w-full h-36 overflow-hidden hidden bg-slate-800">
+                <img id="drawer-cover" src="" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Content Area -->
+            <div
+                class="flex-grow overflow-y-auto p-10 space-y-6 select-text prose prose-invert max-w-none text-darkGreen">
+                <div class="border-b border-[var(--border-color)]/60 pb-5">
+                    <h2 id="drawer-title" class="font-sans text-2xl text-darkGreen leading-tight mb-2">Title</h2>
+                    <div class="flex items-center gap-2 text-[11px] text-mutedGreen">
+                        <span id="drawer-date">August 14, 2026</span>
+                        <span>•</span>
+                        <span id="drawer-author">Sarthak Roy</span>
+                        <span>•</span>
+                        <span id="drawer-category"
+                            class="font-bold text-accentOrange uppercase tracking-widest text-[9px]">Backend</span>
+                    </div>
+                </div>
+                <!-- Render container -->
+                <div id="drawer-content" class="text-sm leading-relaxed space-y-5">
+                    <!-- markdown rendered html -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE BOTTOM NAVIGATION (Pro Mobile App feel) -->
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#1D4533] border-t border-[#2C5745]/30 flex items-center justify-around px-2 z-40 shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
+            <button onclick="switchTab('posts')" id="nav-posts-mobile" class="flex flex-col items-center justify-center flex-grow text-white transition-all py-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 114 0v2m-4 0h4m-4 0H5a2 2 0 00-2 2v3m2 4h10m-10 4h10" />
+                </svg>
+                <span class="text-[9px] font-bold mt-1 uppercase tracking-wider">Articles</span>
+            </button>
+            <button onclick="switchTab('write')" id="nav-write-mobile" class="flex flex-col items-center justify-center flex-grow text-white/60 hover:text-white transition-all py-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                <span class="text-[9px] font-bold mt-1 uppercase tracking-wider">Write</span>
+            </button>
+            <button onclick="switchTab('authors')" id="nav-authors-mobile" class="flex flex-col items-center justify-center flex-grow text-white/60 hover:text-white transition-all py-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span class="text-[9px] font-bold mt-1 uppercase tracking-wider">Authors</span>
+            </button>
+            <button onclick="switchTab('settings')" id="nav-settings-mobile" class="flex flex-col items-center justify-center flex-grow text-white/60 hover:text-white transition-all py-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="text-[9px] font-bold mt-1 uppercase tracking-wider">Settings</span>
+            </button>
+        </nav>
+        
+        <!-- Drawer background blur overlay -->
+        <div id="drawer-overlay" onclick="closePreviewDrawer()"
+            class="fixed inset-0 bg-[#000000]/15 backdrop-blur-sm z-40 hidden transition-opacity"></div>
+
+    </main>
+
+    <!-- CORE INTERACTIVE LOGIC -->
+    <script>
+        // Static template data
+        const defaultBlogPosts = [
+            {
+                id: "scalable-backend",
+                title: "Designing Scalable Backend Systems: Principles and Patterns",
+                category: "systems",
+                date: "2026-05-28",
+                readTime: "8",
+                excerpt: "A practical guide to designing backend systems that scale, stay maintainable, and handle real-world complexity.",
+                author: "Sarthak Roy",
+                cover: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+                markdown: `Designing backend architectures that scale gracefully under heavy user load requires adhering to fundamental patterns. In this log, we break down system bottlenecks, database replication schemas, and state isolation models.
+
+## 1. Horizontal Scaling vs Vertical Limits
+
+While vertical scaling (increasing memory/CPU descriptors) is simple, it hits physical hardware bounds quickly. Enforcing a stateless server layer allows standard load balancers to distribute traffic across a dynamic auto-scaled cluster of virtual worker containers.
+
+## 2. Database Isolation & Replication
+
+Read-heavy traffic should be routed to database read replicas to clear write lock bottlenecks. Implementing intelligent caching layers (such as Redis) prevents database tables from query starvation during traffic spikes.`,
+                status: "published"
+            },
+            {
+                id: "nextjs-server-actions",
+                title: "Building a Full-Stack App with Next.js 16 and Server Actions",
+                category: "fullstack",
+                date: "2026-05-24",
+                readTime: "6",
+                excerpt: "Exploring the new features in Next.js 16 and how Server Actions simplify full-stack development.",
+                author: "Sarthak Roy",
+                cover: "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=600&q=80",
+                markdown: `With Next.js 16, server-first client updates have become the baseline pattern. By declaring \`"use server"\` inside data functions, developers can bypass traditional REST/GraphQL API controllers completely.
+
+## Advantages of Server Actions
+
+Server actions handle backend queries directly, compile type safety endpoints dynamically, and ensure database modifications happen safely within server boundary layers. Security tokens are handled directly without client side exposes.`,
+                status: "published"
+            },
+            {
+                id: "auth-done-right",
+                title: "Authentication Done Right: JWT, Refresh Tokens and Security Best Practices",
+                category: "backend",
+                date: "2026-05-20",
+                readTime: "7",
+                excerpt: "A deep dive into building secure authentication systems for modern applications.",
+                author: "Sarah Chen",
+                cover: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80",
+                markdown: `Securing authentication protocols is critical. In this guide, we map token architectures, cookie flag configurations, and session invalidation rules.
+
+## Token Lifecycle: Access vs Refresh
+
+Keep JSON Web Tokens (JWT) access lifetimes short (e.g., 15 minutes). Use secure, \`httpOnly\`, \`Secure\`, and \`SameSite=Strict\` cookie attributes to store refresh tokens, protecting client credentials from cross-site scripting (XSS) vectors.`,
+                status: "published"
+            },
+            {
+                id: "docker-nodejs",
+                title: "Docker Best Practices for Node.js Applications",
+                category: "devops",
+                date: "2026-05-16",
+                readTime: "5",
+                excerpt: "Containerize your Node.js apps the right way and make your deployments reproducible and predictable.",
+                author: "Alex Rivera",
+                cover: "https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=600&q=80",
+                markdown: `Badly configured Dockerfiles bloat server resource footprints. We detail layer caching, multi-stage builds, and running as non-root containers.
+
+## 1. Use Multi-Stage Build Configurations
+
+Compile development dependencies in a temporary stage, copying only production output dependencies into a slim alpine node container stage. This limits image payloads by up to 80%.`,
+                status: "published"
+            },
+            {
+                id: "postgresql-indexing",
+                title: "PostgreSQL Indexing: The Ultimate Performance Boost",
+                category: "databases",
+                date: "2026-05-12",
+                readTime: "6",
+                excerpt: "Understand indexing in PostgreSQL with real examples and performance benchmarks.",
+                author: "Sarthak Roy",
+                cover: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=600&q=80",
+                markdown: `Indexes are essential for database performance. We explore B-Tree indexing logic, indexes on multi-column keys, and parsing EXPLAIN ANALYZE logs.
+
+## Index Selection Strategies
+
+PostgreSQL uses B-Tree index structures by default. Always verify your queries use index scans instead of sequence table scans to avoid CPU spikes during high query intervals.`,
+                status: "published"
+            }
+        ];
+
+        const defaultAuthors = [
+            {
+                name: "Sarthak Roy",
+                role: "Owner",
+                avatar: "self_5-removebg-preview.png",
+                bio: "Full Stack Developer building developer tools and backend systems."
+            },
+            {
+                name: "Sarah Chen",
+                role: "Security Analyst",
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80",
+                bio: "Application security audit developer."
+            },
+            {
+                name: "Alex Rivera",
+                role: "Technical Writer",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80",
+                bio: "Scaling infrastructure developer advocate."
+            }
+        ];
+
+        // Global Workspace States
+        let posts = [];
+        let authors = [];
+        let activeAuthor = {};
+        let autoSaveTimer = null;
+
+        // Workspace setup
+        window.addEventListener('DOMContentLoaded', () => {
+            initWorkspace();
+            loadPaperPrefs(); // Load tactile writing paper configurations
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('post-date').value = today;
+        });
+
+        // Initialize state variables from cache
+        function initWorkspace() {
+            const cachedPosts = localStorage.getItem('dashboard_posts');
+            if (cachedPosts) {
+                posts = JSON.parse(cachedPosts);
+            } else {
+                posts = [...defaultBlogPosts];
+                savePostsToStorage();
+            }
+
+            const cachedAuthors = localStorage.getItem('dashboard_authors');
+            if (cachedAuthors) {
+                authors = JSON.parse(cachedAuthors);
+            } else {
+                authors = [...defaultAuthors];
+                saveAuthorsToStorage();
+            }
+
+            const cachedActiveAuthor = localStorage.getItem('dashboard_active_author');
+            if (cachedActiveAuthor) {
+                activeAuthor = JSON.parse(cachedActiveAuthor);
+            } else {
+                activeAuthor = authors[0];
+                saveActiveAuthorToStorage();
+            }
+
+            refreshActiveAuthorUI();
+            renderDropdownAuthors();
+            refreshAuthorsSelects();
+            renderPostsList();
+            renderAuthorsList();
+        }
+
+        function savePostsToStorage() {
+            localStorage.setItem('dashboard_posts', JSON.stringify(posts));
+        }
+
+        function saveAuthorsToStorage() {
+            localStorage.setItem('dashboard_authors', JSON.stringify(authors));
+        }
+
+        function saveActiveAuthorToStorage() {
+            localStorage.setItem('dashboard_active_author', JSON.stringify(activeAuthor));
+        }
+
+        // Active profile updates
+        function refreshActiveAuthorUI() {
+            document.getElementById('active-author-name').innerText = activeAuthor.name;
+            document.getElementById('active-author-role').innerText = activeAuthor.role;
+
+            const img = document.getElementById('active-author-avatar');
+            const mobileImg = document.getElementById('mobile-active-avatar');
+            const avatarUrl = activeAuthor.avatar || getGradAvatar(activeAuthor.name);
+
+            if (img) {
+                img.src = avatarUrl;
+                img.onerror = () => { img.src = getGradAvatar(activeAuthor.name); };
+            }
+            if (mobileImg) {
+                mobileImg.src = avatarUrl;
+                mobileImg.onerror = () => { mobileImg.src = getGradAvatar(activeAuthor.name); };
+            }
+        }
+
+        // Toggle profile dropdown selector
+        function toggleAuthorDropdown() {
+            const dropdown = document.getElementById('author-select-dropdown');
+            const arrow = document.getElementById('profile-arrow');
+            dropdown.classList.toggle('hidden');
+            if (dropdown.classList.contains('hidden')) {
+                arrow.style.transform = "rotate(0deg)";
+            } else {
+                arrow.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // Toggle mobile profile dropdown selector
+        function toggleMobileProfileDropdown() {
+            const dropdown = document.getElementById('mobile-author-select-dropdown');
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        // Switcher dropdown list items
+        function renderDropdownAuthors() {
+            const container = document.getElementById('dropdown-author-list');
+            const mobileContainer = document.getElementById('mobile-dropdown-author-list');
+
+            const html = authors.map(author => {
+                const avatarSrc = author.avatar || getGradAvatar(author.name);
+                return `
+                    <button onclick="changeActiveAuthor('${author.name}')" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#2C5745]/40 text-left transition-all group">
+                        <img src="${avatarSrc}" onerror="this.src='${getGradAvatar(author.name)}'" class="w-5.5 h-5.5 rounded-full object-cover grayscale">
+                        <span class="text-[10px] font-bold text-slate-300 group-hover:text-white truncate">${author.name}</span>
+                    </button>
+                `;
+            }).join('');
+
+            if (container) container.innerHTML = html;
+            if (mobileContainer) mobileContainer.innerHTML = html;
+        }
+
+        // Update active writer account
+        function changeActiveAuthor(name) {
+            const found = authors.find(a => a.name === name);
+            if (found) {
+                activeAuthor = found;
+                saveActiveAuthorToStorage();
+                refreshActiveAuthorUI();
+                renderAuthorsList(); // Update count highlights in list
+                showNotification(`Switched profile to ${name}`);
+            }
+
+            const dropdown = document.getElementById('author-select-dropdown');
+            const mobileDropdown = document.getElementById('mobile-author-select-dropdown');
+
+            if (dropdown) dropdown.classList.add('hidden');
+            if (mobileDropdown) mobileDropdown.classList.add('hidden');
+
+            const arrow = document.getElementById('profile-arrow');
+            if (arrow) arrow.style.transform = "rotate(0deg)";
+        }
+
+        // Synchronize author selects
+        function refreshAuthorsSelects() {
+            const select = document.getElementById('post-author');
+            select.innerHTML = "";
+            authors.forEach(author => {
+                select.innerHTML += `<option value="${author.name}">${author.name}</option>`;
+            });
+        }
+
+        // Reset Cache trigger
+        function resetWorkspaceToDefault() {
+            if (confirm("Restore default workspace? This resets your publications feed.")) {
+                localStorage.removeItem('dashboard_posts');
+                localStorage.removeItem('dashboard_authors');
+                localStorage.removeItem('dashboard_active_author');
+                initWorkspace();
+                showNotification("Workspace restored successfully");
+                switchTab('posts');
+            }
+        }
+
+        // PAPER CUSTOMIZER CONTROLLERS (Tactile Notepad Studio)
+        function applyPaperStyle(style) {
+            const sheet = document.getElementById('paper-sheet');
+            sheet.classList.remove('paper-blank-style', 'paper-ruled-style', 'paper-grid-style', 'paper-dots-style');
+
+            if (style === 'blank') sheet.classList.add('paper-blank-style');
+            else if (style === 'ruled') sheet.classList.add('paper-ruled-style');
+            else if (style === 'grid') sheet.classList.add('paper-grid-style');
+            else if (style === 'dots') sheet.classList.add('paper-dots-style');
+
+            savePaperPrefs();
+        }
+
+        function applyPaperTone(tone) {
+            const sheet = document.getElementById('paper-sheet');
+            sheet.style.backgroundColor = ""; // Reset inline
+            sheet.style.color = ""; // Reset inline
+
+            if (tone === 'ivory') {
+                sheet.style.backgroundColor = "#FDFBF7";
+                sheet.style.color = "#2B251F";
+            } else if (tone === 'slate') {
+                sheet.style.backgroundColor = "#FAFAFA";
+                sheet.style.color = "#171717";
+            } else if (tone === 'sage') {
+                sheet.style.backgroundColor = "#F2F6F3";
+                sheet.style.color = "#1D3D30";
+            } else if (tone === 'lavender') {
+                sheet.style.backgroundColor = "#F7F7FD";
+                sheet.style.color = "#211F30";
+            }
+
+            savePaperPrefs();
+        }
+
+        function applyPaperFontSize(size) {
+            const textarea = document.getElementById('post-markdown');
+            textarea.style.fontSize = ""; // Reset inline
+
+            if (size === 'sm') textarea.style.fontSize = "12px";
+            else if (size === 'md') textarea.style.fontSize = "14px";
+            else if (size === 'lg') textarea.style.fontSize = "16px";
+
+            savePaperPrefs();
+        }
+
+        function savePaperPrefs() {
+            const style = document.getElementById('paper-style-select').value;
+            const size = document.getElementById('paper-size-select').value;
+            const sheet = document.getElementById('paper-sheet');
+            const bg = sheet.style.backgroundColor;
+            const fg = sheet.style.color;
+
+            const prefs = { style, size, bg, fg };
+            localStorage.setItem('editor_paper_preferences', JSON.stringify(prefs));
+        }
+
+        function loadPaperPrefs() {
+            const saved = localStorage.getItem('editor_paper_preferences');
+            if (saved) {
+                try {
+                    const prefs = JSON.parse(saved);
+                    document.getElementById('paper-style-select').value = prefs.style;
+                    document.getElementById('paper-size-select').value = prefs.size;
+
+                    applyPaperStyle(prefs.style);
+                    applyPaperFontSize(prefs.size);
+
+                    const sheet = document.getElementById('paper-sheet');
+                    if (prefs.bg) sheet.style.backgroundColor = prefs.bg;
+                    if (prefs.fg) sheet.style.color = prefs.fg;
+                } catch (e) {
+                    applyPaperStyle('grid');
+                }
+            } else {
+                applyPaperStyle('grid');
+            }
+        }
+
+        // Initials avatar generator
+        function getGradAvatar(name) {
+            return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2c5745&color=f4f6f3&bold=true`;
+        }
+
+        // NAV BAR VIEW SWITCHER
+        function switchTab(tabId) {
+            closePreviewDrawer(); // Close drawer if open
+
+            // Hide tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+
+            // Remove sidebar highlights
+            const navButtons = document.querySelectorAll('nav button');
+            navButtons.forEach(btn => {
+                btn.classList.remove('sidebar-active');
+            });
+
+            // Show tab
+            const activeTab = document.getElementById(`tab-${tabId}`);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+                activeTab.classList.add('block', 'animate-subtle');
+            }
+
+            // Highlight nav
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('sidebar-active');
+            }
+
+            // Highlight mobile nav
+            const mobileNavs = document.querySelectorAll('nav[class*="md:hidden"] button');
+            mobileNavs.forEach(btn => {
+                btn.classList.remove('text-white');
+                btn.classList.add('text-white/60');
+            });
+            const activeMobileNav = document.getElementById(`nav-${tabId}-mobile`);
+            if (activeMobileNav) {
+                activeMobileNav.classList.remove('text-white/60');
+                activeMobileNav.classList.add('text-white');
+            }
+
+            // Adjust Top Bar Subtitles & Hide/Show Auto-Save Status
+            const pageTitle = document.getElementById('page-title');
+            const pageSubtitle = document.getElementById('page-subtitle');
+            const saveStatusEl = document.getElementById('auto-save-status');
+
+            if (tabId === 'posts') {
+                pageTitle.innerText = "Publications";
+                pageSubtitle.innerText = "Manage posts on Sarthak Roy's portfolio blog.";
+                if (saveStatusEl) saveStatusEl.classList.add('hidden');
+                renderPostsList();
+            } else if (tabId === 'write') {
+                const editId = document.getElementById('edit-post-id').value;
+                pageTitle.innerText = editId ? "Edit Log" : "Write Log";
+                pageSubtitle.innerText = editId ? "Make updates to an existing article log." : "Compose a new markdown log entry.";
+                if (saveStatusEl) saveStatusEl.classList.remove('hidden');
+            } else if (tabId === 'authors') {
+                pageTitle.innerText = "Collaborators";
+                pageSubtitle.innerText = "Configure multi-author registration databases.";
+                if (saveStatusEl) saveStatusEl.classList.add('hidden');
+                renderAuthorsList();
+            } else if (tabId === 'settings') {
+                pageTitle.innerText = "Settings";
+                pageSubtitle.innerText = "Tune log workspace configurations.";
+                if (saveStatusEl) saveStatusEl.classList.add('hidden');
+            }
+
+            const dropdown = document.getElementById('author-select-dropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+            const mobileDropdown = document.getElementById('mobile-author-select-dropdown');
+            if (mobileDropdown) mobileDropdown.classList.add('hidden');
+        }
+
+        function quickNewPost() {
+            clearEditor();
+            document.getElementById('post-author').value = activeAuthor.name;
+            setEditorPane('write');
+            switchTab('write');
+        }
+
+
+        // TOAST NOTIFICATIONS
+        function showNotification(message) {
+            const toast = document.getElementById('toast-notification');
+            toast.innerText = message;
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+            }, 3000);
+        }
+
+
+        // PUBLICATIONS LIST COMPILER
+        function renderPostsList(filteredPosts = null) {
+            const container = document.getElementById('posts-list-container');
+            container.innerHTML = "";
+
+            const targetPosts = filteredPosts || posts;
+
+            if (targetPosts.length === 0) {
+                document.getElementById('posts-empty-message').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('posts-empty-message').classList.add('hidden');
+            }
+
+            const catLabels = {
+                systems: "System Design",
+                backend: "Backend",
+                devops: "DevOps",
+                databases: "Databases",
+                fullstack: "Full Stack",
+                ai: "AI/ML"
+            };
+
+            targetPosts.forEach((post, index) => {
+                const isEven = index % 2 === 0;
+
+                // Color Tokens from graphic:
+                // Lavender Theme: bg-[#D2CEF6], text-[#1B1842], accent-[#584FF3]
+                // Lime Theme: bg-[#E5F993], text-[#1E300B], accent-[#584FF3]
+                const bgClass = isEven ? 'bg-[#D2CEF6]' : 'bg-[#E5F993]';
+                const textClass = isEven ? 'text-[#1B1842]' : 'text-[#1E300B]';
+                const accentClass = 'text-[#584FF3]'; // Unified vibrant number accent
+
+                const postNumber = String(index + 1).padStart(2, '0');
+                const formattedDate = new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                const catName = catLabels[post.category] || post.category;
+
+                const statusBadge = post.status === 'published'
+                    ? `<button onclick="quickTogglePublish('${post.id}')" class="status-badge px-2 py-0.5 rounded text-[8px] font-bold border border-current hover:bg-white/20 transition-colors uppercase tracking-widest shrink-0" title="Published (Click to draft)">Published</button>`
+                    : `<button onclick="quickTogglePublish('${post.id}')" class="status-badge px-2 py-0.5 rounded text-[8px] font-bold border border-dashed border-current hover:bg-white/20 transition-colors opacity-60 uppercase tracking-widest shrink-0" title="Draft (Click to publish)">Draft</button>`;
+
+                container.innerHTML += `
+                    <div onclick="if(!event.target.closest('button') && !event.target.closest('.status-badge')){ openPreviewDrawer('${post.id}') }" class="${bgClass} ${textClass} rounded-2xl p-6 flex flex-col justify-between h-[230px] select-none hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer relative group">
+                        
+                        <!-- Top Line: Category & Sequence Number -->
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] uppercase tracking-widest font-extrabold opacity-75">${catName}</span>
+                                <span class="text-3xl font-extrabold ${accentClass} font-sans tracking-tighter leading-none">${postNumber}</span>
+                            </div>
+                            
+                            <!-- Title & Excerpt -->
+                            <h3 class="text-base font-extrabold leading-snug tracking-tight mt-2.5 group-hover:underline line-clamp-2">
+                                ${post.title}
+                            </h3>
+                            <p class="text-[11px] mt-1.5 opacity-80 font-light leading-relaxed line-clamp-2">
+                                ${post.excerpt || 'No description provided.'}
+                            </p>
+                        </div>
+
+                        <!-- Bottom Line: Meta Info & Actions -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-3.5 border-t border-current/10 mt-auto gap-3">
+                            <div class="text-[9.5px] opacity-75 font-medium leading-none flex flex-wrap items-center gap-x-1.5">
+                                <span>${formattedDate}</span>
+                                <span class="opacity-50 select-none">•</span>
+                                <span>${post.readTime} min read</span>
+                                <span class="opacity-50 select-none">•</span>
+                                <span class="font-bold">By ${post.author}</span>
+                            </div>
+                            
+                            <div class="flex items-center gap-1.5 sm:gap-2 self-end sm:self-auto">
+                                ${statusBadge}
+                                <button onclick="loadPostToEditor('${post.id}')" class="px-2 py-0.5 text-[8px] font-bold border border-current/20 bg-white/10 hover:bg-white/30 rounded uppercase tracking-wider transition-colors">Edit</button>
+                                <button onclick="deletePost('${post.id}')" class="px-2 py-0.5 text-[8px] font-bold border border-rose-500/30 text-rose-700 bg-rose-500/10 hover:bg-rose-500/20 rounded uppercase tracking-wider transition-colors">Delete</button>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+            });
+        }
+
+        // Filters callback
+        function runFilterPosts() {
+            const query = document.getElementById('posts-search-input').value.trim().toLowerCase();
+            const cat = document.getElementById('posts-category-select').value;
+            const status = document.getElementById('posts-status-select').value;
+
+            const filtered = posts.filter(post => {
+                const searchMatches = query === '' ||
+                    post.title.toLowerCase().includes(query) ||
+                    post.excerpt.toLowerCase().includes(query);
+
+                const catMatches = cat === 'all' || post.category === cat;
+                const statusMatches = status === 'all' || post.status === status;
+
+                return searchMatches && catMatches && statusMatches;
+            });
+
+            renderPostsList(filtered);
+        }
+
+        // Toggle state from list
+        function quickTogglePublish(id) {
+            const index = posts.findIndex(p => p.id === id);
+            if (index !== -1) {
+                const newStatus = posts[index].status === 'published' ? 'draft' : 'published';
+                posts[index].status = newStatus;
+                savePostsToStorage();
+                runFilterPosts();
+                showNotification(`Status updated to ${newStatus.toUpperCase()}`);
+            }
+        }
+
+        // Delete post
+        function deletePost(id) {
+            const post = posts.find(p => p.id === id);
+            if (post && confirm(`Permanently delete article "${post.title}"?`)) {
+                posts = posts.filter(p => p.id !== id);
+                savePostsToStorage();
+                runFilterPosts();
+                showNotification("Article deleted");
+            }
+        }
+
+
+        // PREVIEW DRAWER CONTROLLERS (UX Enhancement)
+        function openPreviewDrawer(id) {
+            const post = posts.find(p => p.id === id);
+            if (!post) return;
+
+            const catLabels = {
+                systems: "System Design",
+                backend: "Backend",
+                devops: "DevOps",
+                databases: "Databases",
+                fullstack: "Full Stack",
+                ai: "AI/ML"
+            };
+
+            document.getElementById('drawer-title').innerText = post.title;
+            document.getElementById('drawer-author').innerText = post.author;
+            document.getElementById('drawer-category').innerText = catLabels[post.category] || post.category;
+
+            const niceDate = new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('drawer-date').innerText = niceDate;
+
+            // Handle cover image inside drawer
+            const coverBox = document.getElementById('drawer-cover-box');
+            if (post.cover && post.cover.trim() !== '') {
+                document.getElementById('drawer-cover').src = post.cover;
+                coverBox.classList.remove('hidden');
+            } else {
+                coverBox.classList.add('hidden');
+            }
+
+            // HTML parser
+            try {
+                document.getElementById('drawer-content').innerHTML = marked.parse(post.markdown || '');
+            } catch (err) {
+                document.getElementById('drawer-content').innerHTML = `<p class="text-rose-500 font-mono">Error rendering: ${err.message}</p>`;
+            }
+
+            // Slide drawer out
+            document.getElementById('preview-drawer').classList.add('open');
+            document.getElementById('drawer-overlay').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closePreviewDrawer() {
+            document.getElementById('preview-drawer').classList.remove('open');
+            document.getElementById('drawer-overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function togglePaperSettingsPopover(e) {
+            e.stopPropagation();
+            const popover = document.getElementById('paper-settings-popover');
+            popover.classList.toggle('hidden');
+        }
+
+        // Close popover when clicking outside
+        document.addEventListener('click', function(e) {
+            const popover = document.getElementById('paper-settings-popover');
+            if (popover && !popover.classList.contains('hidden')) {
+                const cogButton = document.querySelector('[onclick*="togglePaperSettingsPopover"]');
+                if (!popover.contains(e.target) && (!cogButton || !cogButton.contains(e.target))) {
+                    popover.classList.add('hidden');
+                }
+            }
+        });
+
+
+        // EDITOR PANE SWITCHERS
+        function setEditorPane(paneId) {
+            const panes = document.querySelectorAll('.editor-pane');
+            panes.forEach(pane => {
+                pane.classList.add('hidden');
+                pane.classList.remove('block');
+            });
+
+            const tabButtons = document.querySelectorAll('#editor-form button');
+            tabButtons.forEach(btn => {
+                if (btn.id && btn.id.startsWith('pane-btn-')) {
+                    btn.className = "flex-grow md:flex-initial text-center text-xs py-1.5 px-4 rounded-lg font-medium text-slate-600 hover:text-slate-800 transition-all duration-200";
+                }
+            });
+
+            const activePane = document.getElementById(`editor-pane-${paneId}`);
+            if (activePane) {
+                activePane.classList.remove('hidden');
+                activePane.classList.add('block');
+            }
+
+            const activeTab = document.getElementById(`pane-btn-${paneId}`);
+            if (activeTab) {
+                activeTab.className = "flex-grow md:flex-initial text-center text-xs py-1.5 px-4 rounded-lg font-bold bg-[#1D4533] text-white shadow-sm transition-all duration-200";
+            }
+
+            // Sync with preview updates
+            if (paneId === 'preview') {
+                const titleVal = document.getElementById('post-title').value.trim() || "Untitled Post";
+                const catVal = document.getElementById('post-category').value;
+                const authorVal = document.getElementById('post-author').value;
+                const dateVal = document.getElementById('post-date').value;
+                const coverVal = document.getElementById('post-cover').value.trim();
+
+                document.getElementById('preview-title').innerText = titleVal;
+                document.getElementById('preview-author').innerText = authorVal;
+
+                const catLabels = {
+                    systems: "System Design",
+                    backend: "Backend",
+                    devops: "DevOps",
+                    databases: "Databases",
+                    fullstack: "Full Stack",
+                    ai: "AI/ML"
+                };
+                document.getElementById('preview-category').innerText = catLabels[catVal] || catVal;
+
+                if (dateVal) {
+                    const niceDate = new Date(dateVal).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    document.getElementById('preview-date').innerText = niceDate;
+                }
+
+                const previewCoverBox = document.getElementById('preview-cover-container');
+                if (coverVal) {
+                    document.getElementById('preview-cover').src = coverVal;
+                    previewCoverBox.classList.remove('hidden');
+                } else {
+                    previewCoverBox.classList.add('hidden');
+                }
+
+                compileMarkdown();
+            }
+        }
+
+
+        // LIVE STATS CALCULATOR (UX Enhancement)
+        function calculateWritingStats() {
+            const text = document.getElementById('post-markdown').value;
+            const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+
+            // Auto calculate reading speed (avg 200 words per min)
+            const readTime = Math.max(1, Math.ceil(words / 200));
+
+            document.getElementById('editor-words-count').innerText = `${words} words`;
+            document.getElementById('editor-read-time').innerText = `${readTime} min read`;
+
+            // Sync with metadata read time input
+            document.getElementById('post-readtime').value = readTime;
+        }
+
+
+        // LIVE AUTO-SAVE ENGINE (UX Enhancement)
+        function onEditorInput() {
+            calculateWritingStats();
+
+            const isAutoSaveActive = document.getElementById('setting-autosave').checked;
+            if (!isAutoSaveActive) return;
+
+            const statusText = document.getElementById('auto-save-status');
+            statusText.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span><span>Saving changes...</span>`;
+
+            // Reset timer
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                autoSaveDraft();
+            }, 1200); // Trigger save when user stops typing for 1.2s
+        }
+
+        function autoSaveDraft() {
+            const title = document.getElementById('post-title').value.trim();
+            const markdown = document.getElementById('post-markdown').value;
+            const editId = document.getElementById('edit-post-id').value;
+
+            // Only auto save if there is content written
+            if (!title && !markdown) return;
+
+            const category = document.getElementById('post-category').value;
+            const author = document.getElementById('post-author').value;
+            const readTime = document.getElementById('post-readtime').value;
+            const date = document.getElementById('post-date').value;
+            const excerpt = document.getElementById('post-excerpt').value.trim();
+            const cover = document.getElementById('post-cover').value.trim();
+
+            if (editId) {
+                // Update
+                const idx = posts.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    posts[idx].title = title || posts[idx].title;
+                    posts[idx].markdown = markdown;
+                    posts[idx].category = category;
+                    posts[idx].author = author;
+                    posts[idx].readTime = readTime;
+                    posts[idx].date = date;
+                    posts[idx].excerpt = excerpt;
+                    posts[idx].cover = cover;
+                    savePostsToStorage();
+                }
+            } else {
+                // Create a temporary cache log if not saved yet
+                const tempSlug = "draft-autosave-temp";
+                const idx = posts.findIndex(p => p.id === tempSlug);
+                const draftPost = {
+                    id: tempSlug,
+                    title: title || "Untitled Draft",
+                    category: category,
+                    date: date,
+                    readTime: readTime,
+                    excerpt: excerpt || "Auto-saved draft log.",
+                    author: author,
+                    markdown: markdown,
+                    cover: cover,
+                    status: "draft"
+                };
+
+                if (idx !== -1) {
+                    posts[idx] = draftPost;
+                } else {
+                    posts.push(draftPost);
+                }
+                savePostsToStorage();
+                // Set id so subsequent typing updates this specific draft
+                document.getElementById('edit-post-id').value = tempSlug;
+                document.getElementById('post-slug').value = tempSlug;
+            }
+
+            const statusText = document.getElementById('auto-save-status');
+            statusText.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>Saved to local cache</span>`;
+        }
+
+
+        // ABSTRACT UNSPLASH COVER GENERATOR (UX Enhancement)
+        function generateCoverImage() {
+            const topics = ['abstract', 'minimalist', 'coding', 'technology', 'workspace', 'server-infrastructure'];
+            const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+            const randomNum = Math.floor(Math.random() * 1000);
+
+            const randomCoverUrl = `https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80&sig=${randomNum}`;
+
+            const coverInput = document.getElementById('post-cover');
+            coverInput.value = randomCoverUrl;
+            onCoverUrlChange();
+            showNotification("Generated aesthetic cover art");
+        }
+
+        function onCoverUrlChange() {
+            const url = document.getElementById('post-cover').value.trim();
+            const box = document.getElementById('cover-thumbnail-box');
+            const img = document.getElementById('cover-thumbnail');
+
+            if (url) {
+                img.src = url;
+                box.classList.remove('hidden');
+            } else {
+                box.classList.add('hidden');
+            }
+        }
+
+
+        // AUTO EXCERPT GENERATOR (UX Enhancement)
+        function autoGenerateExcerpt() {
+            const body = document.getElementById('post-markdown').value;
+            if (!body.trim()) {
+                alert("Please write some content first to extract an excerpt.");
+                return;
+            }
+
+            // Strip markdown formatting & get first sentence
+            let clean = body.replace(/[#*`_\[\]()]/g, '').trim();
+            let firstSentence = clean.split(/[.!?]/)[0] + '.';
+
+            if (firstSentence.length > 120) {
+                firstSentence = firstSentence.substring(0, 117) + '...';
+            }
+
+            document.getElementById('post-excerpt').value = firstSentence;
+            showNotification("Excerpt generated from content");
+        }
+
+
+        // MARKDOWN UTILITY FUNCTIONS
+        function generateSlug() {
+            const titleInput = document.getElementById('post-title').value;
+            const editId = document.getElementById('edit-post-id').value;
+
+            // Don't modify if editing an active published post
+            if (!editId || editId === 'draft-autosave-temp') {
+                const slug = titleInput.toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
+                document.getElementById('post-slug').value = slug;
+            }
+        }
+
+        function compileMarkdown() {
+            const markdown = document.getElementById('post-markdown').value;
+            const preview = document.getElementById('markdown-html-preview');
+
+            if (!markdown.trim()) {
+                preview.innerHTML = `<p class="text-slate-400 italic">No content written yet.</p>`;
+                return;
+            }
+
+            try {
+                preview.innerHTML = marked.parse(markdown);
+            } catch (err) {
+                preview.innerHTML = `<p class="text-rose-500 font-mono">Parser Error: ${err.message}</p>`;
+            }
+        }
+
+        function insertMarkdown(before, after) {
+            const textarea = document.getElementById('post-markdown');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+
+            const selectedText = text.substring(start, end);
+            const replacement = before + selectedText + after;
+
+            textarea.value = text.substring(0, start) + replacement + text.substring(end);
+
+            textarea.focus();
+            textarea.selectionStart = start + before.length;
+            textarea.selectionEnd = start + before.length + selectedText.length;
+
+            calculateWritingStats();
+            compileMarkdown();
+        }
+
+        function loadPostToEditor(id) {
+            const post = posts.find(p => p.id === id);
+            if (post) {
+                document.getElementById('edit-post-id').value = post.id;
+                document.getElementById('post-title').value = post.title;
+                document.getElementById('post-slug').value = post.id;
+                document.getElementById('post-category').value = post.category;
+                document.getElementById('post-author').value = post.author;
+                document.getElementById('post-readtime').value = post.readTime;
+                document.getElementById('post-date').value = post.date;
+                document.getElementById('post-excerpt').value = post.excerpt;
+                document.getElementById('post-markdown').value = post.markdown || "";
+                document.getElementById('post-cover').value = post.cover || "";
+
+                onCoverUrlChange();
+                calculateWritingStats();
+                setEditorPane('write');
+                switchTab('write');
+                compileMarkdown();
+            }
+        }
+
+        function cancelEdit() {
+            if (confirm("Discard all log editor changes?")) {
+                // If it was a temp draft, remove it from list
+                const editId = document.getElementById('edit-post-id').value;
+                if (editId === 'draft-autosave-temp') {
+                    posts = posts.filter(p => p.id !== editId);
+                    savePostsToStorage();
+                }
+
+                clearEditor();
+                switchTab('posts');
+            }
+        }
+
+        function clearEditor() {
+            document.getElementById('edit-post-id').value = "";
+            document.getElementById('post-title').value = "";
+            document.getElementById('post-slug').value = "";
+            document.getElementById('post-excerpt').value = "";
+            document.getElementById('post-markdown').value = "";
+            document.getElementById('post-cover').value = "";
+            document.getElementById('markdown-html-preview').innerHTML = `<p class="text-slate-400 italic">No content written yet.</p>`;
+
+            onCoverUrlChange();
+            calculateWritingStats();
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('post-date').value = today;
+        }
+
+        // Save action callback
+        function savePost(event) {
+            event.preventDefault();
+
+            const submitter = event.submitter || document.activeElement;
+            const statusVal = submitter.value || 'draft';
+
+            let editId = document.getElementById('edit-post-id').value;
+            const title = document.getElementById('post-title').value.trim();
+            const slug = document.getElementById('post-slug').value.trim() || title.toLowerCase().replace(/\s+/g, '-');
+            const category = document.getElementById('post-category').value;
+            const author = document.getElementById('post-author').value;
+            const readTime = document.getElementById('post-readtime').value;
+            const date = document.getElementById('post-date').value;
+            const excerpt = document.getElementById('post-excerpt').value.trim();
+            const markdown = document.getElementById('post-markdown').value;
+            const cover = document.getElementById('post-cover').value.trim();
+
+            // Override auto-save ID name back to correct slug
+            if (editId === 'draft-autosave-temp') {
+                // Remove temp post
+                posts = posts.filter(p => p.id !== 'draft-autosave-temp');
+                editId = "";
+            }
+
+            if (editId) {
+                // Update
+                const idx = posts.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    posts[idx].title = title;
+                    posts[idx].category = category;
+                    posts[idx].author = author;
+                    posts[idx].readTime = readTime;
+                    posts[idx].date = date;
+                    posts[idx].excerpt = excerpt;
+                    posts[idx].markdown = markdown;
+                    posts[idx].cover = cover;
+                    posts[idx].status = statusVal;
+
+                    savePostsToStorage();
+                    showNotification("Article updated successfully");
+                }
+            } else {
+                // Create
+                let finalSlug = slug;
+                let slugCounter = 1;
+                while (posts.some(p => p.id === finalSlug)) {
+                    finalSlug = `${slug}-${slugCounter}`;
+                    slugCounter++;
+                }
+
+                const newPost = {
+                    id: finalSlug,
+                    title: title,
+                    category: category,
+                    date: date,
+                    readTime: readTime,
+                    excerpt: excerpt,
+                    author: author,
+                    markdown: markdown,
+                    cover: cover,
+                    status: statusVal
+                };
+
+                posts.push(newPost);
+                savePostsToStorage();
+                showNotification("New article publication compiled");
+            }
+
+            clearEditor();
+            switchTab('posts');
+        }
+
+
+        // COLLABORATORS DIRECTORY
+        function renderAuthorsList() {
+            const list = document.getElementById('authors-simple-list');
+            list.innerHTML = "";
+
+            authors.forEach((author, index) => {
+                const isEven = index % 2 === 0;
+                const bgClass = isEven ? 'bg-[#D2CEF6]' : 'bg-[#E5F993]';
+                const textClass = isEven ? 'text-[#1B1842]' : 'text-[#1E300B]';
+                const accentClass = 'text-[#584FF3]';
+                const authorNumber = String(index + 1).padStart(2, '0');
+
+                const authorPostCount = posts.filter(p => p.author === author.name).length;
+                const avatarSrc = author.avatar || getGradAvatar(author.name);
+
+                const isActive = activeAuthor.name === author.name;
+                const activeTag = isActive
+                    ? `<span class="px-2 py-0.5 rounded text-[8px] font-bold border border-current bg-white/20 uppercase tracking-widest">Active Writer</span>`
+                    : `<button onclick="makeActiveFromCard('${author.name}')" class="px-2 py-0.5 rounded text-[8px] font-bold border border-current/30 hover:bg-white/10 uppercase tracking-widest transition-colors">Set Active</button>`;
+
+                list.innerHTML += `
+                    <div class="${bgClass} ${textClass} rounded-2xl p-6 flex flex-col justify-between h-[210px] select-none hover:-translate-y-1 hover:shadow-md transition-all duration-300 relative">
+                        
+                        <!-- Top Line: Sequence & Avatar -->
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-3.5">
+                                <img src="${avatarSrc}" onerror="this.src='${getGradAvatar(author.name)}'" class="w-10 h-10 rounded-full object-cover grayscale border border-current/25">
+                                <div>
+                                    <h4 class="text-sm font-extrabold tracking-tight">${author.name}</h4>
+                                    <p class="text-[9px] uppercase tracking-wider font-extrabold opacity-75 mt-0.5">${author.role}</p>
+                                </div>
+                            </div>
+                            <span class="text-3xl font-extrabold ${accentClass} font-sans tracking-tighter leading-none">${authorNumber}</span>
+                        </div>
+
+                        <!-- Bio Excerpt -->
+                        <p class="text-[11px] mt-3 opacity-80 leading-relaxed font-light line-clamp-2">
+                            ${author.bio || 'No bio provided for this author.'}
+                        </p>
+
+                        <!-- Bottom Line: Post count and Active Toggle -->
+                        <div class="flex items-center justify-between pt-3 border-t border-current/10 mt-auto">
+                            <div class="text-[9px] opacity-75 font-mono">
+                                <span>LOGS COMPILED: <strong>${authorPostCount}</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${activeTag}
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+            });
+        }
+
+        function makeActiveFromCard(name) {
+            const found = authors.find(a => a.name === name);
+            if (found) {
+                activeAuthor = found;
+                saveActiveAuthorToStorage();
+                refreshActiveAuthorUI();
+                renderAuthorsList();
+                showNotification(`Switched active profile to ${name}`);
+            }
+        }
+
+        // Register new author
+        function addAuthor(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('new-author-name').value.trim();
+            const role = document.getElementById('new-author-role').value.trim();
+            const avatar = document.getElementById('new-author-avatar').value.trim();
+            const bio = document.getElementById('new-author-bio').value.trim();
+
+            if (authors.some(a => a.name.toLowerCase() === name.toLowerCase())) {
+                alert("Author profile already registered.");
+                return;
+            }
+
+            const newAuthor = {
+                name: name,
+                role: role,
+                avatar: avatar || null,
+                bio: bio
+            };
+
+            authors.push(newAuthor);
+            saveAuthorsToStorage();
+
+            renderDropdownAuthors();
+            refreshAuthorsSelects();
+            renderAuthorsList();
+
+            document.getElementById('author-register-form').reset();
+            showNotification(`Collaborator profile added for ${name}`);
+        }
+    </script>
+</body>
+
+</html>
